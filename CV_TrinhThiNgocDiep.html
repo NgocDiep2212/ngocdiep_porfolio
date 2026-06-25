@@ -116,7 +116,7 @@
   .body { padding: 14px 30px 20px; }
 
   /* ── Section ── */
-  .section { margin-bottom: 12px; }
+  .section { margin-bottom: 10px; }
 
   .section-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -153,8 +153,8 @@
 
   /* ── Experience ── */
   .exp-item {
-    margin-bottom: 9px;
-    padding-bottom: 9px;
+    margin-bottom: 7px;
+    padding-bottom: 7px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -217,8 +217,8 @@
     border: 1px solid var(--border);
     border-left: 2.5px solid var(--accent);
     border-radius: 0 8px 8px 0;
-    padding: 7px 10px;
-    margin-bottom: 5px;
+    padding: 6px 10px;
+    margin-bottom: 4px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
 
@@ -231,9 +231,9 @@
   }
 
   .project-stack {
-    font-size: 8.5px;
+    font-size: 10px;
     color: var(--accent);
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 4px;
   }
 
@@ -383,7 +383,7 @@
     <div class="section">
       <div class="section-title">Professional Summary</div>
       <div class="summary-text">
-        Software Engineer with <strong>1.5+ years of professional experience</strong>, specializing in AI automation and workflow integration. Professionally built <strong>Jenkins CI/CD pipelines</strong>, REST APIs (CakePHP), and integrated AI tooling (Cursor AI, Claude) to streamline development workflows at ZIGExN VeNtura. Built portfolio automation projects using <strong>n8n</strong>, <strong>CrewAI agents</strong>, and AI APIs — including a RAG-powered support triage system and CRM sync workflows across <strong>HubSpot and Salesforce</strong>. Currently deepening AI automation expertise through self-directed projects. Comfortable translating business requirements into technical solutions and collaborating with stakeholders in Agile environments.
+        AI Automation Engineer with a software engineering background and <strong>1.5+ years of professional experience</strong> in workflow integration, backend development, and API connectivity. Professionally built <strong>Jenkins CI/CD pipelines</strong>, REST APIs (CakePHP), and integrated AI tooling (Cursor AI, Claude) to streamline development workflows at ZIGExN VeNtura. Built portfolio automation projects using <strong>n8n</strong>, <strong>CrewAI agents</strong>, and AI APIs — including a RAG-powered support triage system and CRM sync workflows across <strong>HubSpot and Salesforce</strong>. Comfortable translating business requirements into technical solutions and collaborating with stakeholders in Agile environments.
       </div>
     </div>
 
@@ -475,9 +475,9 @@
         <div class="project-name">AI Support Triage &amp; RAG Response Pipeline</div>
         <div class="project-stack">n8n · Gmail · Google Gemini · Qdrant · HubSpot CRM · Telegram · Human-in-the-Loop</div>
         <ul class="project-bullets">
-          <li>Built n8n workflow: Gmail intake → Gemini AI triage (category / priority / sentiment / team routing) → HubSpot ticket create/update with full contact resolution.</li>
-          <li>Implemented RAG retrieval (Qdrant + Gemini embeddings) with strict no-hallucination rules — AI answers only from uploaded company knowledge base, escalates when KB is insufficient.</li>
-          <li>Reduced manual ticket classification from <strong>~5 minutes to under 30 seconds</strong> per inbound email; Telegram approval gate before every customer reply is sent.</li>
+          <li>Built <strong>n8n</strong> workflow: <strong>Gmail</strong> intake → <strong>Gemini AI</strong> triage (category / priority / sentiment / team routing) → <strong>HubSpot</strong> ticket create/update with full contact resolution.</li>
+          <li>Implemented <strong>RAG retrieval</strong> (<strong>Qdrant</strong> + Gemini embeddings) with strict no-hallucination rules — AI answers only from uploaded company knowledge base, escalates when KB is insufficient.</li>
+          <li>Reduced manual ticket classification from <strong>~5 minutes to under 30 seconds</strong> per inbound email; <strong>Telegram</strong> approval gate before every customer reply is sent.</li>
         </ul>
         <div class="project-links">
           <a class="plink" href="AI Customer Support Triage System.json" download>↓ n8n JSON</a>
@@ -489,9 +489,8 @@
         <div class="project-name">Salesforce Account &amp; Contact Sync — CRM Data Integration</div>
         <div class="project-stack">n8n · Salesforce REST API · Google Sheets · SOQL · Dedup Logic · Audit Trail</div>
         <ul class="project-bullets">
-          <li>Built idempotent n8n sync workflow: Google Sheets → field validation → SOQL lookup for existing accounts → dedup merge → Salesforce create/update → contact upsert by Email.</li>
-          <li>Validation gate routes invalid rows to a dedicated error path; safe to re-run without creating duplicates — dedup logic prevents double-writes at every stage.</li>
-          <li>Full audit trail: writes Success/Failed status, Salesforce record ID, and sync timestamp back to the source Google Sheet row on every run.</li>
+          <li>Built idempotent <strong>n8n</strong> sync workflow: <strong>Google Sheets</strong> → field validation → <strong>SOQL</strong> lookup for existing accounts → dedup merge → <strong>Salesforce</strong> create/update → contact upsert by Email.</li>
+          <li>Validation gate routes invalid rows to error path; safe to re-run — <strong>dedup logic</strong> prevents double-writes. Full <strong>audit trail</strong> writes Success/Failed status, record ID, and timestamp back to the source Sheet.</li>
         </ul>
         <div class="project-links">
           <a class="plink" href="Create Salesforce accounts.json" download>↓ n8n JSON</a>
@@ -503,8 +502,8 @@
         <div class="project-name">AI Job Matcher — Multi-Agent Data Enrichment &amp; Scoring Pipeline</div>
         <div class="project-stack">Python · CrewAI · SerperDev API · Pydantic · Streamlit · Claude API</div>
         <ul class="project-bullets">
-          <li>Built multi-agent CrewAI pipeline with custom tool-calling layer: agents autonomously source, enrich, and score job listings via SerperDev API with error handling and retry logic.</li>
-          <li>Per-run cost and token tracking; Streamlit UI with configurable search filters and one-click HTML + DOCX report download.</li>
+          <li>Built multi-agent <strong>CrewAI</strong> pipeline with custom <strong>tool-calling layer</strong>: agents autonomously source, enrich, and score job listings via <strong>SerperDev API</strong> with error handling and retry logic.</li>
+          <li>Per-run <strong>cost and token tracking</strong>; <strong>Streamlit</strong> UI with configurable search filters and one-click HTML + DOCX report download.</li>
         </ul>
         <div class="project-links">
           <a class="plink" href="https://fabulous-daifuku-d8e73d.netlify.app/" target="_blank">◇ Live Demo</a>
