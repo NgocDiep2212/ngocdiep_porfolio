@@ -1,0 +1,795 @@
+{
+    "nodes": [
+      {
+        "parameters": {
+          "resource": "search",
+          "query": "=Select ID, Name from Account WHERE Name = '{{$json[\"Company Name\"].replace(/'/g, \"\\\\'\")}}'"
+        },
+        "type": "n8n-nodes-base.salesforce",
+        "typeVersion": 1.1,
+        "position": [
+          -112,
+          0
+        ],
+        "id": "ddd789ef-2e26-43a7-8134-ef4eac098133",
+        "name": "Get Exist Account",
+        "alwaysOutputData": true,
+        "credentials": {
+          "salesforceOAuth2Api": {
+            "id": "Os22NsGtoQjbG6Fz",
+            "name": "Salesforce account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "account",
+          "name": "={{ $('Read Google Sheet').item.json['Company Name'] }}",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.salesforce",
+        "typeVersion": 1.1,
+        "position": [
+          560,
+          -432
+        ],
+        "id": "ad507daa-4bd0-4fcd-a380-714aad5327c1",
+        "name": "Create an account",
+        "credentials": {
+          "salesforceOAuth2Api": {
+            "id": "Os22NsGtoQjbG6Fz",
+            "name": "Salesforce account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "contact",
+          "operation": "upsert",
+          "externalId": "Email",
+          "externalIdValue": "={{ $json.Email }}",
+          "lastname": "={{ $json['Last Name'] }}",
+          "additionalFields": {
+            "acconuntId": "={{ $json.Id }}",
+            "firstName": "={{ $json['First Name'] }}"
+          }
+        },
+        "type": "n8n-nodes-base.salesforce",
+        "typeVersion": 1.1,
+        "position": [
+          1232,
+          -192
+        ],
+        "id": "3bfc5ef1-825d-4e7d-af57-59dbd79b3fd1",
+        "name": "Create or update a contact",
+        "credentials": {
+          "salesforceOAuth2Api": {
+            "id": "Os22NsGtoQjbG6Fz",
+            "name": "Salesforce account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "advanced": true,
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "Company Name",
+                "field2": "Name"
+              }
+            ]
+          },
+          "joinMode": "keepNonMatches",
+          "outputDataFrom": "input1",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          112,
+          -352
+        ],
+        "id": "e9bd3754-f746-4928-859e-b8f4de33cb87",
+        "name": "Keep new company"
+      },
+      {
+        "parameters": {
+          "compare": "selectedFields",
+          "fieldsToCompare": "Company Name",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.removeDuplicates",
+        "typeVersion": 2,
+        "position": [
+          336,
+          -352
+        ],
+        "id": "5b62980e-b180-4c3e-a5de-fbb3326c1562",
+        "name": "Remove Duplicates Company Name"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "cc6a90f3-8df5-4e9e-a7d9-8e97c2abec46",
+                "leftValue": "={{ $('Read Google Sheet').item.json['Company Name'] }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "90b475ac-5d9a-4221-ae71-ac561f2d2a2c",
+                "leftValue": "={{ $('Read Google Sheet').item.json.Email }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -336,
+          -64
+        ],
+        "id": "7f8aeb7b-d2fc-42f7-a96f-155c8e3b15b3",
+        "name": "Validate data input"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "4dfa2151-3442-414c-8ab9-92c1ff19a7de",
+                "name": "Name",
+                "value": "={{ $('Remove Duplicates Company Name').item.json['Company Name'] }}",
+                "type": "string"
+              },
+              {
+                "id": "d06a1f06-d971-4b29-9620-59a16ce0b912",
+                "name": "created_id",
+                "value": "={{ $json.id }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          784,
+          -432
+        ],
+        "id": "d2576a17-aa26-4fd9-a078-467b6bfeea01",
+        "name": "Set new account name"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -1008,
+          -64
+        ],
+        "id": "258c544d-9b66-4c07-a9ff-810c0e28eb30",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8",
+            "mode": "list",
+            "cachedResultName": "Salesforce accounts",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Trang tính1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8/edit#gid=0"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "=Status",
+                "lookupValue": "Pending"
+              }
+            ]
+          },
+          "options": {
+            "returnFirstMatch": false
+          }
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -784,
+          -64
+        ],
+        "id": "12a107da-c391-4231-b394-7ea9360fe011",
+        "name": "Read Google Sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "6cEBAJoaH92JyHdr",
+            "name": "personal client"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "571e4040-6912-4d63-a9a1-f44738e56fc2",
+                "name": "rowID",
+                "value": "={{ $json.ID }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -560,
+          -64
+        ],
+        "id": "6ec153f0-11c2-4229-b164-bea37c18b367",
+        "name": "Set Row ID"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "08d6c834-5dea-40e4-b0c8-8fed70345597",
+                "leftValue": "={{ $json.Id }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          112,
+          48
+        ],
+        "id": "0e47dc58-64e5-47be-afa4-c05098a20f02",
+        "name": "Check account exist"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "advanced": true,
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "Company Name",
+                "field2": "Name"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          336,
+          -64
+        ],
+        "id": "58e938c1-1884-47bb-a115-326b08a3f033",
+        "name": "Merge data exist account"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8",
+            "mode": "list",
+            "cachedResultName": "Salesforce",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Accounts",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ID": "={{ $json.ID }}",
+              "Status": "Failed",
+              "Last Sync": "={{ $now.format('yyyy-MM-dd HH:mm:ss') }}",
+              "Error Message": "Company Name and Email is required."
+            },
+            "matchingColumns": [
+              "ID"
+            ],
+            "schema": [
+              {
+                "id": "ID",
+                "displayName": "ID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Company Name",
+                "displayName": "Company Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "First Name",
+                "displayName": "First Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Last Name",
+                "displayName": "Last Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Purpose",
+                "displayName": "Purpose",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Status",
+                "displayName": "Status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Last Sync",
+                "displayName": "Last Sync",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Error Message",
+                "displayName": "Error Message",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -112,
+          192
+        ],
+        "id": "b239f8f4-4e04-4259-b130-818c210d8b26",
+        "name": "Update Failed Record",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "6cEBAJoaH92JyHdr",
+            "name": "personal client"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8",
+            "mode": "list",
+            "cachedResultName": "Salesforce",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Accounts",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FJK9SO1sky6WYShu9snLjxl8ELjhTuCuFQN51I_mTD8/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ID": "={{ $('Set Row ID').item.json.ID }}",
+              "Status": "Success",
+              "Last Sync": "={{ $now.format('yyyy-MM-dd HH:mm:ss') }}"
+            },
+            "matchingColumns": [
+              "ID"
+            ],
+            "schema": [
+              {
+                "id": "ID",
+                "displayName": "ID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Company Name",
+                "displayName": "Company Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "First Name",
+                "displayName": "First Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Last Name",
+                "displayName": "Last Name",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Email",
+                "displayName": "Email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Purpose",
+                "displayName": "Purpose",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Status",
+                "displayName": "Status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Last Sync",
+                "displayName": "Last Sync",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Error Message",
+                "displayName": "Error Message",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1456,
+          -192
+        ],
+        "id": "6ece8110-31a1-4a42-a51d-95b83bf9363c",
+        "name": "Update success record",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "6cEBAJoaH92JyHdr",
+            "name": "personal client"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "advanced": true,
+          "mergeByFields": {
+            "values": [
+              {
+                "field1": "Company Name",
+                "field2": "Name"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          1008,
+          -352
+        ],
+        "id": "8bb00605-8bbd-4221-93f3-f1362060ff6d",
+        "name": "Merge new account data"
+      }
+    ],
+    "connections": {
+      "Get Exist Account": {
+        "main": [
+          [
+            {
+              "node": "Keep new company",
+              "type": "main",
+              "index": 1
+            },
+            {
+              "node": "Check account exist",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Create an account": {
+        "main": [
+          [
+            {
+              "node": "Set new account name",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Create or update a contact": {
+        "main": [
+          [
+            {
+              "node": "Update success record",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Keep new company": {
+        "main": [
+          [
+            {
+              "node": "Remove Duplicates Company Name",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Remove Duplicates Company Name": {
+        "main": [
+          [
+            {
+              "node": "Merge new account data",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Create an account",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Validate data input": {
+        "main": [
+          [
+            {
+              "node": "Keep new company",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge data exist account",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Get Exist Account",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Update Failed Record",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set new account name": {
+        "main": [
+          [
+            {
+              "node": "Merge new account data",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Read Google Sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Read Google Sheet": {
+        "main": [
+          [
+            {
+              "node": "Set Row ID",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Set Row ID": {
+        "main": [
+          [
+            {
+              "node": "Validate data input",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Check account exist": {
+        "main": [
+          [
+            {
+              "node": "Merge data exist account",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge data exist account": {
+        "main": [
+          [
+            {
+              "node": "Create or update a contact",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge new account data": {
+        "main": [
+          [
+            {
+              "node": "Create or update a contact",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "pinData": {},
+    "meta": {
+      "templateCredsSetupCompleted": true,
+      "instanceId": "d8ee7e108d01cf09893dd8853d1c18d7e9a83ebaa9049e005c6a959d608b3875"
+    }
+  }

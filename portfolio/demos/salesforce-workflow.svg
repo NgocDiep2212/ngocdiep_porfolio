@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 120" fill="none">
+  <rect width="820" height="120" rx="8" fill="#1e1e1e" stroke="#2a2a2a"/>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#00b8ff"/>
+    </marker>
+  </defs>
+  <g font-family="Inter, sans-serif" font-size="11" fill="#f0f0f0">
+    <rect x="16" y="40" width="110" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="71" y="58" text-anchor="middle" fill="#888">Google Sheets</text>
+    <text x="71" y="72" text-anchor="middle" fill="#555" font-size="9">Pending rows</text>
+    <line x1="126" y1="60" x2="150" y2="60" stroke="#00b8ff" marker-end="url(#arrow)"/>
+    <rect x="150" y="40" width="88" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="194" y="64" text-anchor="middle" fill="#888">Validate</text>
+    <line x1="238" y1="60" x2="262" y2="60" stroke="#00b8ff" marker-end="url(#arrow)"/>
+    <rect x="262" y="40" width="100" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="312" y="58" text-anchor="middle" fill="#888">SOQL Search</text>
+    <text x="312" y="72" text-anchor="middle" fill="#555" font-size="9">existing accounts</text>
+    <line x1="362" y1="60" x2="386" y2="60" stroke="#00b8ff" marker-end="url(#arrow)"/>
+    <rect x="386" y="40" width="88" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="430" y="64" text-anchor="middle" fill="#888">Dedup</text>
+    <line x1="474" y1="60" x2="498" y2="60" stroke="#00b8ff" marker-end="url(#arrow)"/>
+    <rect x="498" y="40" width="110" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="553" y="58" text-anchor="middle" fill="#888">Create Account</text>
+    <text x="553" y="72" text-anchor="middle" fill="#555" font-size="9">Salesforce</text>
+    <line x1="608" y1="60" x2="632" y2="60" stroke="#00b8ff" marker-end="url(#arrow)"/>
+    <rect x="632" y="40" width="110" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="687" y="58" text-anchor="middle" fill="#888">Upsert Contact</text>
+    <text x="687" y="72" text-anchor="middle" fill="#555" font-size="9">by Email</text>
+    <line x1="742" y1="60" x2="758" y2="60" stroke="#00b8ff" marker-end="url(#arrow)"/>
+    <rect x="758" y="48" width="44" height="24" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="780" y="64" text-anchor="middle" fill="#00e5a0" font-size="9">Sheet</text>
+  </g>
+  <text x="410" y="20" text-anchor="middle" font-family="Syne, sans-serif" font-size="12" font-weight="700" fill="#00b8ff">Salesforce Account &amp; Contact Sync</text>
+</svg>

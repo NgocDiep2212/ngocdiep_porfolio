@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 120" fill="none">
+  <rect width="880" height="120" rx="8" fill="#1e1e1e" stroke="#2a2a2a"/>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#00e5a0"/>
+    </marker>
+  </defs>
+  <g font-family="Inter, sans-serif" font-size="11" fill="#f0f0f0">
+    <rect x="16" y="40" width="88" height="40" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="60" y="64" text-anchor="middle" fill="#888">Gmail</text>
+    <line x1="104" y1="60" x2="128" y2="60" stroke="#00e5a0" marker-end="url(#arrow)"/>
+    <rect x="128" y="40" width="100" height="40" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="178" y="64" text-anchor="middle" fill="#888">Gemini Triage</text>
+    <line x1="228" y1="60" x2="252" y2="60" stroke="#00e5a0" marker-end="url(#arrow)"/>
+    <rect x="252" y="40" width="88" height="40" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="296" y="64" text-anchor="middle" fill="#888">HubSpot</text>
+    <line x1="340" y1="60" x2="364" y2="60" stroke="#00e5a0" marker-end="url(#arrow)"/>
+    <rect x="364" y="40" width="88" height="40" rx="4" fill="#111" stroke="#00b8ff"/>
+    <text x="408" y="64" text-anchor="middle" fill="#888">Qdrant RAG</text>
+    <line x1="452" y1="60" x2="476" y2="60" stroke="#00e5a0" marker-end="url(#arrow)"/>
+    <rect x="476" y="40" width="100" height="40" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="526" y="58" text-anchor="middle" fill="#888">Mail Agent</text>
+    <text x="526" y="72" text-anchor="middle" fill="#555" font-size="9">draft reply</text>
+    <line x1="576" y1="60" x2="600" y2="60" stroke="#00e5a0" marker-end="url(#arrow)"/>
+    <rect x="600" y="40" width="96" height="40" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="648" y="58" text-anchor="middle" fill="#888">Telegram</text>
+    <text x="648" y="72" text-anchor="middle" fill="#555" font-size="9">HITL approve</text>
+    <line x1="696" y1="60" x2="720" y2="60" stroke="#00e5a0" marker-end="url(#arrow)"/>
+    <rect x="720" y="40" width="88" height="40" rx="4" fill="#111" stroke="#00e5a0"/>
+    <text x="764" y="64" text-anchor="middle" fill="#888">Gmail Reply</text>
+  </g>
+  <text x="440" y="20" text-anchor="middle" font-family="Syne, sans-serif" font-size="12" font-weight="700" fill="#00e5a0">AI Support Triage &amp; RAG Response Pipeline</text>
+</svg>
