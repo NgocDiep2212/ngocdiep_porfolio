@@ -49,7 +49,7 @@
 
   /* ── Header ── */
   .header {
-    padding: 18px 30px 14px;
+    padding: 14px 30px 11px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -57,8 +57,8 @@
   }
 
   .profile-photo {
-    width: 62px;
-    height: 62px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     border: 2px solid var(--accent-light);
     object-fit: cover;
@@ -86,7 +86,7 @@
     letter-spacing: 1.8px;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .header-contacts {
@@ -113,10 +113,27 @@
   }
 
   /* ── Body ── */
-  .body { padding: 14px 30px 20px; }
+  .body {
+    padding: 16px 30px 18px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .col-left  { flex: 0 0 61%; min-width: 0; }
+
+  .col-right {
+    flex: 1;
+    min-width: 0;
+    border-left: 1px solid var(--border);
+    padding-left: 22px;
+  }
+
+  /* Narrower sidebar adjustments */
+  .col-right .skill-label { min-width: 74px; font-size: 7.5px; }
 
   /* ── Section ── */
-  .section { margin-bottom: 10px; }
+  .section { margin-bottom: 14px; }
 
   .section-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -142,8 +159,8 @@
   .summary-text {
     font-size: 10.5px;
     color: var(--text-secondary);
-    line-height: 1.6;
-    padding: 8px 12px;
+    line-height: 1.58;
+    padding: 9px 13px;
     background: var(--accent-light);
     border-left: 2.5px solid var(--accent);
     border-radius: 0 6px 6px 0;
@@ -153,8 +170,8 @@
 
   /* ── Experience ── */
   .exp-item {
-    margin-bottom: 7px;
-    padding-bottom: 7px;
+    margin-bottom: 9px;
+    padding-bottom: 9px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -194,7 +211,7 @@
   .bullets li {
     position: relative;
     padding-left: 12px;
-    margin-bottom: 2.5px;
+    margin-bottom: 3px;
     font-size: 10px;
     color: var(--text-secondary);
     line-height: 1.45;
@@ -217,8 +234,8 @@
     border: 1px solid var(--border);
     border-left: 2.5px solid var(--accent);
     border-radius: 0 8px 8px 0;
-    padding: 6px 10px;
-    margin-bottom: 4px;
+    padding: 7px 11px;
+    margin-bottom: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
 
@@ -231,7 +248,7 @@
   }
 
   .project-stack {
-    font-size: 10px;
+    font-size: 9.5px;
     color: var(--accent);
     font-weight: 600;
     margin-bottom: 4px;
@@ -242,10 +259,10 @@
   .project-bullets li {
     position: relative;
     padding-left: 11px;
-    margin-bottom: 2px;
+    margin-bottom: 2.5px;
     font-size: 9.5px;
     color: var(--text-secondary);
-    line-height: 1.4;
+    line-height: 1.42;
   }
 
   .project-bullets li::before {
@@ -259,7 +276,7 @@
 
   .project-bullets li strong { color: var(--text-primary); font-weight: 600; }
 
-  .project-links { margin-top: 4px; }
+  .project-links { margin-top: 6px; }
 
   .plink {
     display: inline-flex;
@@ -280,7 +297,7 @@
   .skills-grid {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 7px;
   }
 
   .skill-row {
@@ -325,19 +342,19 @@
 
   .edu-name {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
 
-  .edu-detail { font-size: 9.5px; color: var(--text-muted); }
+  .edu-detail { font-size: 9.5px; color: var(--text-muted); line-height: 1.5; }
 
   .lang-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4px;
+    align-items: flex-start;
+    margin-bottom: 6px;
   }
 
   .lang-name { font-size: 10px; font-weight: 600; color: var(--text-primary); }
@@ -349,10 +366,10 @@
 
   @media print {
     body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .page { box-shadow: none; min-height: 297mm; }
+    .page { box-shadow: none; min-height: 297mm; height: 297mm; overflow: hidden; }
     .plink { border: 1px solid rgba(13,148,136,0.3); }
-    .project-item, .exp-item, .bottom-row { page-break-inside: avoid; break-inside: avoid; }
-    .section { page-break-inside: avoid; break-inside: avoid; }
+    .project-item, .exp-item { page-break-inside: avoid; break-inside: avoid; }
+    .col-left, .col-right { page-break-inside: avoid; break-inside: avoid; }
   }
 </style>
 </head>
@@ -379,159 +396,169 @@
 
   <div class="body">
 
-    <!-- PROFESSIONAL SUMMARY -->
-    <div class="section">
-      <div class="section-title">Professional Summary</div>
-      <div class="summary-text">
-        AI Automation Engineer with a software engineering background and <strong>1.5+ years of professional experience</strong> in workflow integration, backend development, and API connectivity. Professionally built <strong>Jenkins CI/CD pipelines</strong>, REST APIs (CakePHP), and integrated AI tooling (Cursor AI, Claude) to streamline development workflows at ZIGExN VeNtura. Built portfolio automation projects using <strong>n8n</strong>, <strong>CrewAI agents</strong>, and AI APIs — including a RAG-powered support triage system and CRM sync workflows across <strong>HubSpot and Salesforce</strong>. Comfortable translating business requirements into technical solutions and collaborating with stakeholders in Agile environments.
-      </div>
-    </div>
+    <!-- ══ LEFT COLUMN ══ -->
+    <div class="col-left">
 
-    <!-- EXPERIENCE -->
-    <div class="section">
-      <div class="section-title">Work Experience</div>
-
-      <div class="exp-item">
-        <div class="exp-row">
-          <div class="exp-title">Junior PHP Developer — Automation Focus</div>
-          <div class="exp-date">Aug 2024 – Mar 2026</div>
+      <!-- PROFESSIONAL SUMMARY -->
+      <div class="section">
+        <div class="section-title">Professional Summary</div>
+        <div class="summary-text">
+          AI Automation Engineer with a software engineering background and <strong>1.5+ years of professional experience</strong> in workflow integration, backend development, and API connectivity. Professionally built <strong>Jenkins CI/CD pipelines</strong>, REST APIs (CakePHP), and integrated AI tooling (Cursor AI, Claude) to streamline development workflows at ZIGExN VeNtura. Built portfolio automation projects using <strong>n8n</strong>, <strong>CrewAI agents</strong>, and AI APIs — including a RAG-powered support triage system and CRM sync workflows across <strong>HubSpot and Salesforce</strong>. Comfortable translating business requirements into technical solutions and collaborating with stakeholders in Agile environments.
         </div>
-        <div class="exp-company">ZIGExN VeNtura Co., Ltd. · Ho Chi Minh City</div>
-        <ul class="bullets">
-          <li>Built <strong>Jenkins CI/CD automation scripts</strong> to eliminate recurring manual deploy and monitoring steps across operational pipelines.</li>
-          <li>Integrated <strong>Cursor AI & Claude</strong> into development workflows for automated code review, unit test generation, and requirement analysis — visibly reduced review cycle time for the development team.</li>
-          <li>Designed and maintained <strong>REST APIs</strong> (CakePHP) connecting multiple internal business systems; handled OAuth auth, payload mapping, and end-to-end error recovery.</li>
-          <li>Collaborated with <strong>stakeholders</strong> to translate business requirements into technical specs and <strong>Playwright E2E automated test</strong> workflows.</li>
-        </ul>
       </div>
 
-      <div class="exp-item">
-        <div class="exp-row">
-          <div class="exp-title">Web Developer Intern</div>
-          <div class="exp-date">May 2024 – Aug 2024</div>
+      <!-- EXPERIENCE -->
+      <div class="section">
+        <div class="section-title">Work Experience</div>
+
+        <div class="exp-item">
+          <div class="exp-row">
+            <div class="exp-title">Junior PHP Developer — Automation Focus</div>
+            <div class="exp-date">Aug 2024 – Mar 2026</div>
+          </div>
+          <div class="exp-company">ZIGExN VeNtura Co., Ltd. · Ho Chi Minh City</div>
+          <ul class="bullets">
+            <li>Built <strong>Jenkins CI/CD automation scripts</strong> to eliminate recurring manual deploy and monitoring steps across operational pipelines.</li>
+            <li>Integrated <strong>Cursor AI & Claude</strong> into development workflows for automated code review, unit test generation, and requirement analysis — visibly reduced review cycle time for the development team.</li>
+            <li>Designed and maintained <strong>REST APIs</strong> (CakePHP) connecting multiple internal business systems; handled OAuth auth, payload mapping, and end-to-end error recovery.</li>
+            <li>Collaborated with <strong>stakeholders</strong> to translate business requirements into technical specs and <strong>Playwright E2E automated test</strong> workflows.</li>
+          </ul>
         </div>
-        <div class="exp-company">ZIGExN VeNtura Co., Ltd. · Ho Chi Minh City</div>
-        <ul class="bullets">
-          <li>Optimized site performance via Google PageSpeed Insights; collaborated via Git in a professional Agile team environment.</li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- TECHNICAL SKILLS -->
-    <div class="section">
-      <div class="section-title">Technical Skills</div>
-      <div class="skills-grid">
-        <div class="skill-row">
-          <div class="skill-label">AI & Automation</div>
-          <div class="skill-tags">
-            <span class="stag stag-teal">n8n</span>
-            <span class="stag stag-teal">CrewAI</span>
-            <span class="stag stag-teal">Gemini API</span>
-            <span class="stag stag-teal">Claude API</span>
-            <span class="stag stag-teal">Qdrant</span>
-            <span class="stag stag-teal">RAG Pipelines</span>
-            <span class="stag stag-teal">Webhook</span>
+        <div class="exp-item">
+          <div class="exp-row">
+            <div class="exp-title">Web Developer Intern</div>
+            <div class="exp-date">May 2024 – Aug 2024</div>
+          </div>
+          <div class="exp-company">ZIGExN VeNtura Co., Ltd. · Ho Chi Minh City</div>
+          <ul class="bullets">
+            <li>Optimized site performance via Google PageSpeed Insights; collaborated via Git in a professional Agile team environment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SELECTED PROJECTS -->
+      <div class="section">
+        <div class="section-title">Selected Projects</div>
+
+        <div class="project-item">
+          <div class="project-name">AI Support Triage &amp; RAG Response Pipeline</div>
+          <div class="project-stack">n8n · Gmail · Google Gemini · Qdrant · HubSpot CRM · Telegram · Human-in-the-Loop</div>
+          <ul class="project-bullets">
+            <li>Built <strong>n8n</strong> workflow: <strong>Gmail</strong> intake → <strong>Gemini AI</strong> triage (category / priority / sentiment / team routing) → <strong>HubSpot</strong> ticket create/update with full contact resolution.</li>
+            <li>Implemented <strong>RAG retrieval</strong> (<strong>Qdrant</strong> + Gemini embeddings) with strict no-hallucination rules — AI answers only from uploaded company knowledge base, escalates when KB is insufficient.</li>
+            <li>Reduced manual ticket classification from <strong>~5 minutes to under 30 seconds</strong> per inbound email; <strong>Telegram</strong> approval gate before every customer reply is sent.</li>
+          </ul>
+          <div class="project-links">
+            <a class="plink" href="AI Customer Support Triage System.json" download>↓ n8n JSON</a>
+            <a class="plink" href="./index.html#support-triage">◇ Portfolio</a>
           </div>
         </div>
-        <div class="skill-row">
-          <div class="skill-label">CRM & Integration</div>
-          <div class="skill-tags">
-            <span class="stag stag-indigo">HubSpot</span>
-            <span class="stag stag-indigo">Salesforce</span>
-            <span class="stag stag-indigo">REST APIs</span>
-            <span class="stag stag-indigo">OAuth / JWT</span>
-            <span class="stag stag-indigo">API Integration</span>
+
+        <div class="project-item">
+          <div class="project-name">Salesforce Account &amp; Contact Sync — CRM Data Integration</div>
+          <div class="project-stack">n8n · Salesforce REST API · Google Sheets · SOQL · Dedup Logic · Audit Trail</div>
+          <ul class="project-bullets">
+            <li>Built idempotent <strong>n8n</strong> sync workflow: <strong>Google Sheets</strong> → field validation → <strong>SOQL</strong> lookup for existing accounts → dedup merge → <strong>Salesforce</strong> create/update → contact upsert by Email.</li>
+            <li>Validation gate routes invalid rows to error path; safe to re-run — <strong>dedup logic</strong> prevents double-writes. Full <strong>audit trail</strong> writes Success/Failed status, record ID, and timestamp back to the source Sheet.</li>
+          </ul>
+          <div class="project-links">
+            <a class="plink" href="Create Salesforce accounts.json" download>↓ n8n JSON</a>
+            <a class="plink" href="./index.html#salesforce-sync">◇ Portfolio</a>
           </div>
         </div>
-        <div class="skill-row">
-          <div class="skill-label">Backend</div>
-          <div class="skill-tags">
-            <span class="stag stag-gray">Python</span>
-            <span class="stag stag-gray">PHP</span>
-            <span class="stag stag-gray">CakePHP</span>
-            <span class="stag stag-gray">Jenkins</span>
-            <span class="stag stag-gray">Playwright E2E</span>
-          </div>
-        </div>
-        <div class="skill-row">
-          <div class="skill-label">Tools & Platforms</div>
-          <div class="skill-tags">
-            <span class="stag stag-gray">Streamlit</span>
-            <span class="stag stag-gray">JavaScript</span>
-            <span class="stag stag-gray">Docker</span>
-            <span class="stag stag-gray">GCP</span>
-            <span class="stag stag-gray">MySQL</span>
-            <span class="stag stag-gray">Git</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- SELECTED PROJECTS -->
-    <div class="section">
-      <div class="section-title">Selected Projects</div>
-
-      <div class="project-item">
-        <div class="project-name">AI Support Triage &amp; RAG Response Pipeline</div>
-        <div class="project-stack">n8n · Gmail · Google Gemini · Qdrant · HubSpot CRM · Telegram · Human-in-the-Loop</div>
-        <ul class="project-bullets">
-          <li>Built <strong>n8n</strong> workflow: <strong>Gmail</strong> intake → <strong>Gemini AI</strong> triage (category / priority / sentiment / team routing) → <strong>HubSpot</strong> ticket create/update with full contact resolution.</li>
-          <li>Implemented <strong>RAG retrieval</strong> (<strong>Qdrant</strong> + Gemini embeddings) with strict no-hallucination rules — AI answers only from uploaded company knowledge base, escalates when KB is insufficient.</li>
-          <li>Reduced manual ticket classification from <strong>~5 minutes to under 30 seconds</strong> per inbound email; <strong>Telegram</strong> approval gate before every customer reply is sent.</li>
-        </ul>
-        <div class="project-links">
-          <a class="plink" href="AI Customer Support Triage System.json" download>↓ n8n JSON</a>
-          <a class="plink" href="./index.html#support-triage">◇ Portfolio</a>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-name">Salesforce Account &amp; Contact Sync — CRM Data Integration</div>
-        <div class="project-stack">n8n · Salesforce REST API · Google Sheets · SOQL · Dedup Logic · Audit Trail</div>
-        <ul class="project-bullets">
-          <li>Built idempotent <strong>n8n</strong> sync workflow: <strong>Google Sheets</strong> → field validation → <strong>SOQL</strong> lookup for existing accounts → dedup merge → <strong>Salesforce</strong> create/update → contact upsert by Email.</li>
-          <li>Validation gate routes invalid rows to error path; safe to re-run — <strong>dedup logic</strong> prevents double-writes. Full <strong>audit trail</strong> writes Success/Failed status, record ID, and timestamp back to the source Sheet.</li>
-        </ul>
-        <div class="project-links">
-          <a class="plink" href="Create Salesforce accounts.json" download>↓ n8n JSON</a>
-          <a class="plink" href="./index.html#salesforce-sync">◇ Portfolio</a>
-        </div>
-      </div>
-
-      <div class="project-item">
-        <div class="project-name">AI Job Matcher — Multi-Agent Data Enrichment &amp; Scoring Pipeline</div>
-        <div class="project-stack">Python · CrewAI · SerperDev API · Pydantic · Streamlit · Claude API</div>
-        <ul class="project-bullets">
-          <li>Built multi-agent <strong>CrewAI</strong> pipeline with custom <strong>tool-calling layer</strong>: agents autonomously source, enrich, and score job listings via <strong>SerperDev API</strong> with error handling and retry logic.</li>
-          <li>Per-run <strong>cost and token tracking</strong>; <strong>Streamlit</strong> UI with configurable search filters and one-click HTML + DOCX report download.</li>
-        </ul>
-        <div class="project-links">
-          <a class="plink" href="https://fabulous-daifuku-d8e73d.netlify.app/" target="_blank">◇ Live Demo</a>
-          <a class="plink" href="https://github.com/NgocDiep2212/ai_job_matcher" target="_blank">GitHub</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- EDUCATION & LANGUAGES -->
-    <div class="section">
-      <div class="section-title">Education &amp; Languages</div>
-      <div class="bottom-row">
-        <div class="bottom-col">
-          <div class="edu-name">Can Tho University</div>
-          <div class="edu-detail">Bachelor of Information Technology · 2020 – 2024</div>
-        </div>
-        <div class="bottom-col">
-          <div class="lang-row">
-            <div class="lang-name">English</div>
-            <div class="lang-detail">Professional reading &amp; writing · Basic verbal<span class="lang-cert">VSTEP B2 (CEFR)</span></div>
-          </div>
-          <div class="lang-row">
-            <div class="lang-name">Vietnamese</div>
-            <div class="lang-detail">Native</div>
+        <div class="project-item">
+          <div class="project-name">AI Job Matcher — Multi-Agent Data Enrichment &amp; Scoring Pipeline</div>
+          <div class="project-stack">Python · CrewAI · SerperDev API · Pydantic · Streamlit · Claude API</div>
+          <ul class="project-bullets">
+            <li>Built multi-agent <strong>CrewAI</strong> pipeline with custom <strong>tool-calling layer</strong>: agents autonomously source, enrich, and score job listings via <strong>SerperDev API</strong> with error handling and retry logic.</li>
+            <li>Per-run <strong>cost and token tracking</strong>; <strong>Streamlit</strong> UI with configurable search filters and one-click HTML + DOCX report download.</li>
+          </ul>
+          <div class="project-links">
+            <a class="plink" href="https://fabulous-daifuku-d8e73d.netlify.app/" target="_blank">◇ Live Demo</a>
+            <a class="plink" href="https://github.com/NgocDiep2212/ai_job_matcher" target="_blank">GitHub</a>
           </div>
         </div>
       </div>
-    </div>
+
+    </div><!-- /col-left -->
+
+    <!-- ══ RIGHT COLUMN ══ -->
+    <div class="col-right">
+
+      <!-- TECHNICAL SKILLS -->
+      <div class="section">
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-grid">
+          <div class="skill-row">
+            <div class="skill-label">AI & Automation</div>
+            <div class="skill-tags">
+              <span class="stag stag-teal">n8n</span>
+              <span class="stag stag-teal">CrewAI</span>
+              <span class="stag stag-teal">Gemini API</span>
+              <span class="stag stag-teal">Claude API</span>
+              <span class="stag stag-teal">Qdrant</span>
+              <span class="stag stag-teal">RAG Pipelines</span>
+              <span class="stag stag-teal">Webhook</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">CRM & Integration</div>
+            <div class="skill-tags">
+              <span class="stag stag-indigo">HubSpot</span>
+              <span class="stag stag-indigo">Salesforce</span>
+              <span class="stag stag-indigo">REST APIs</span>
+              <span class="stag stag-indigo">OAuth / JWT</span>
+              <span class="stag stag-indigo">API Integration</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Backend</div>
+            <div class="skill-tags">
+              <span class="stag stag-gray">Python</span>
+              <span class="stag stag-gray">PHP</span>
+              <span class="stag stag-gray">CakePHP</span>
+              <span class="stag stag-gray">Jenkins</span>
+              <span class="stag stag-gray">Playwright E2E</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Tools & Platforms</div>
+            <div class="skill-tags">
+              <span class="stag stag-gray">Streamlit</span>
+              <span class="stag stag-gray">JavaScript</span>
+              <span class="stag stag-gray">Docker</span>
+              <span class="stag stag-gray">GCP</span>
+              <span class="stag stag-gray">MySQL</span>
+              <span class="stag stag-gray">Git</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div class="edu-name">Can Tho University</div>
+        <div class="edu-detail">Bachelor of Information Technology</div>
+        <div class="edu-detail" style="margin-top:2px;">2020 – 2024</div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="section">
+        <div class="section-title">Languages</div>
+        <div class="lang-row">
+          <div class="lang-name">English</div>
+          <div class="lang-detail">Professional reading &amp; writing<span class="lang-cert">VSTEP B2 (CEFR)</span></div>
+        </div>
+        <div class="lang-row" style="margin-top:5px;">
+          <div class="lang-name">Vietnamese</div>
+          <div class="lang-detail">Native</div>
+        </div>
+      </div>
+
+    </div><!-- /col-right -->
 
   </div><!-- /body -->
 </div><!-- /page -->
