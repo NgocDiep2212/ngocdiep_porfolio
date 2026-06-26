@@ -1,1498 +1,475 @@
 {
-    "nodes": [
-      {
-        "parameters": {
-          "httpMethod": "POST",
-          "path": "customer-onboarding-start",
-          "options": {}
-        },
-        "id": "becf6277-4274-4c03-adbf-5a58f45ada15",
-        "name": "New Customer Webhook",
-        "type": "n8n-nodes-base.webhook",
-        "position": [
-          -736,
-          864
-        ],
-        "webhookId": "customer-onboarding-start",
-        "typeVersion": 1
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "customer-onboarding-start",
+        "options": {}
       },
-      {
-        "parameters": {
-          "authentication": "appToken",
-          "resource": "contact",
-          "email": "={{ $json.email }}",
-          "additionalFields": {
-            "firstName": "={{ $json.customerName }}",
-            "phoneNumber": "={{ $json.phone }}",
-            "startDate": "={{ $json.signupDate }}"
-          }
-        },
-        "id": "5f6f280d-736c-4a97-a5df-df653f32e854",
-        "name": "Create HubSpot Contact",
-        "type": "n8n-nodes-base.hubspot",
-        "position": [
-          -144,
-          832
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "hubspotAppToken": {
-            "id": "qzTUqYMrAhZ8HcrS",
-            "name": "HubSpot account 2"
-          }
+      "id": "ea0f1588-c35c-4d37-af72-e5e162c38aa6",
+      "name": "New Customer Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        6928,
+        5120
+      ],
+      "webhookId": "customer-onboarding-start",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "resource": "contact",
+        "email": "={{ $json.email }}",
+        "additionalFields": {
+          "firstName": "={{ $json.customerName }}",
+          "phoneNumber": "={{ $json.phone }}",
+          "startDate": "={{ $json.signupDate }}"
         }
       },
-      {
-        "parameters": {
-          "chatId": "-5122583310",
-          "text": "={{ $('New Customer Webhook').item.json.email }} {{ $('New Customer Webhook').item.json.signupDate }}",
-          "additionalFields": {}
-        },
-        "id": "0d932968-bab8-43ed-a2d6-fa29c4aa00d0",
-        "name": "Send Team Notification",
-        "type": "n8n-nodes-base.telegram",
-        "position": [
-          144,
-          752
-        ],
-        "webhookId": "e319793b-83b0-4b4e-8cf5-af921cc0e9ec",
-        "typeVersion": 1,
-        "credentials": {
-          "telegramApi": {
-            "id": "UU6AEXBZ5P5JdLxv",
-            "name": "Telegram account"
-          }
+      "id": "7af60d1d-f295-4e77-b22f-1e1413a19b6a",
+      "name": "Create HubSpot Contact",
+      "type": "n8n-nodes-base.hubspot",
+      "position": [
+        7520,
+        5088
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chatId": "<GROUP_ID>",
+        "text": "={{ $('New Customer Webhook').item.json.email }} {{ $('New Customer Webhook').item.json.signupDate }}",
+        "additionalFields": {}
+      },
+      "id": "9cb8e672-e379-426f-bf50-d4875ef6db06",
+      "name": "Send Team Notification",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        7808,
+        5008
+      ],
+      "webhookId": "e319793b-83b0-4b4e-8cf5-af921cc0e9ec",
+      "typeVersion": 1,
+      "credentials": {
+        "telegramApi": {
+          "id": "UU6AEXBZ5P5JdLxv",
+          "name": "Telegram account"
         }
-      },
-      {
-        "parameters": {
-          "fromEmail": "test@gmail.com",
-          "toEmail": "duckcute44112002@gmail.com",
-          "subject": "Welcome to [Company Name] - Your Journey Starts Here! 🎉",
-          "text": "Hello word",
-          "options": {}
-        },
-        "id": "f405551a-e583-4e6a-b7d4-2e375f77658f",
-        "name": "Send Welcome Email",
-        "type": "n8n-nodes-base.emailSend",
-        "position": [
-          144,
-          928
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "smtp": {
-            "id": "vuMkxHRjOuiLSzcz",
-            "name": "SMTP account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "amount": 2,
-          "unit": "seconds"
-        },
-        "id": "60fbb779-a46c-45ce-8ec7-37a61aca8f0d",
-        "name": "Wait 2 Hours",
-        "type": "n8n-nodes-base.wait",
-        "position": [
-          496,
-          864
-        ],
-        "webhookId": "ed102052-76a3-4302-a179-f8e09d0f7aed",
-        "typeVersion": 1
-      },
-      {
-        "parameters": {
-          "fromEmail": "test@gmail.com",
-          "toEmail": "duckcute44112002@gmail.com",
-          "subject": "Your Onboarding Documents Are Ready! 📋",
-          "text": "hello word 2",
-          "options": {}
-        },
-        "id": "803769ac-f895-4846-8669-1559cdd24d5a",
-        "name": "Send Onboarding Documents",
-        "type": "n8n-nodes-base.emailSend",
-        "position": [
-          752,
-          848
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "smtp": {
-            "id": "vuMkxHRjOuiLSzcz",
-            "name": "SMTP account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "unit": "seconds"
-        },
-        "id": "12262e9d-859b-4fc6-8974-1bab0e6a84b1",
-        "name": "Wait 1 Day",
-        "type": "n8n-nodes-base.wait",
-        "position": [
-          1040,
-          848
-        ],
-        "webhookId": "c37979cb-b222-4f35-a0f9-b7dff99ccea8",
-        "typeVersion": 1
-      },
-      {
-        "parameters": {
-          "authentication": "appToken",
-          "resource": "contact",
-          "email": "={{ $('New Customer Webhook').item.json.email }}",
-          "additionalFields": {
-            "startDate": "={{ $today.format('yyyy-MM-dd') }}"
-          }
-        },
-        "id": "ba3fdba3-6695-4cee-8f5c-cca7132e5d54",
-        "name": "Update CRM Status",
-        "type": "n8n-nodes-base.hubspot",
-        "position": [
-          1344,
-          752
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "hubspotAppToken": {
-            "id": "qzTUqYMrAhZ8HcrS",
-            "name": "HubSpot account 2"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "fromEmail": "test@gmail.com",
-          "toEmail": "duckcute44112002@gmail.com",
-          "subject": "How's your first day going? 🌟",
-          "text": "Hello world 3",
-          "options": {
-            "replyTo": "user@example.com"
-          }
-        },
-        "id": "8f3428ce-640d-493f-98b9-f8bd97a2c215",
-        "name": "Send Personal Check-in",
-        "type": "n8n-nodes-base.emailSend",
-        "position": [
-          1344,
-          944
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "smtp": {
-            "id": "vuMkxHRjOuiLSzcz",
-            "name": "SMTP account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "amount": 2,
-          "unit": "seconds"
-        },
-        "id": "749263f5-e74c-41fd-ac30-bf0b9a3b7568",
-        "name": "Wait 2 More Days",
-        "type": "n8n-nodes-base.wait",
-        "position": [
-          1648,
-          848
-        ],
-        "webhookId": "4d254f31-2974-4d7b-8669-0f1df857209a",
-        "typeVersion": 1
-      },
-      {
-        "parameters": {
-          "fromEmail": "test@gmail.com",
-          "toEmail": "duckcute44112002@gmail.com",
-          "subject": "Your Week 1 Success Guide + Exclusive Training 🎯",
-          "text": "hehe",
-          "options": {}
-        },
-        "id": "22997a77-51b9-4a3e-8bd2-058e7686c8b4",
-        "name": "Send Week 1 Success Guide",
-        "type": "n8n-nodes-base.emailSend",
-        "position": [
-          2208,
-          832
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "smtp": {
-            "id": "vuMkxHRjOuiLSzcz",
-            "name": "SMTP account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "appToken",
-          "resource": "contact",
-          "email": "={{ $('New Customer Webhook').item.json.email }}",
-          "additionalFields": {}
-        },
-        "id": "df0a89b6-5f19-4a64-9798-69eb69365175",
-        "name": "Mark Week 1 Complete",
-        "type": "n8n-nodes-base.hubspot",
-        "position": [
-          2432,
-          592
-        ],
-        "typeVersion": 1,
-        "credentials": {
-          "hubspotAppToken": {
-            "id": "qzTUqYMrAhZ8HcrS",
-            "name": "HubSpot account 2"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "chatId": "-5122583310",
-          "text": "Congrate! Sarah Johnson is aldready done the first week",
-          "additionalFields": {}
-        },
-        "id": "c3e9d791-b639-4600-a444-07591458f72e",
-        "name": "Notify Team of Completion",
-        "type": "n8n-nodes-base.telegram",
-        "position": [
-          2480,
-          1024
-        ],
-        "webhookId": "00e4a472-30f4-4f63-a96e-8c3deb69c704",
-        "typeVersion": 1,
-        "credentials": {
-          "telegramApi": {
-            "id": "UU6AEXBZ5P5JdLxv",
-            "name": "Telegram account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 1
-            },
-            "combinator": "and",
-            "conditions": [
-              {
-                "id": "c1f5e1a0-8c2e-4d1f-9b3a-7e6d5c4b3a21",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty"
-                },
-                "leftValue": "={{ $json.email }}",
-                "rightValue": ""
-              },
-              {
-                "id": "d2g6f2b1-9d3f-5e2g-ac4b-8f7e6d5c4b32",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty"
-                },
-                "leftValue": "={{ $json.customerName }}",
-                "rightValue": ""
-              }
-            ]
-          },
-          "options": {}
-        },
-        "id": "78f24889-e4ca-4c3c-b3c3-112534a66a8c",
-        "name": "Validate Required Fields",
-        "type": "n8n-nodes-base.if",
-        "position": [
-          -384,
-          864
-        ],
-        "typeVersion": 2
-      },
-      {
-        "parameters": {
-          "chatId": "=-5122583310",
-          "text": "Check your required data!",
-          "additionalFields": {}
-        },
-        "id": "7be038e5-3553-4833-ad3a-fafdfbe7cbef",
-        "name": "Send Validation Error Alert",
-        "type": "n8n-nodes-base.telegram",
-        "position": [
-          -192,
-          1168
-        ],
-        "webhookId": "70027811-eb7c-4092-a728-e161bca136b5",
-        "typeVersion": 1,
-        "credentials": {
-          "telegramApi": {
-            "id": "UU6AEXBZ5P5JdLxv",
-            "name": "Telegram account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "const customerName = $input.first().json.customerName;\nvar firstName = customerName.split(' ')[0];\nvar lastName = customerName.split(' ')[1] || '';\n\nreturn {\n  firstName,\n  lastName\n};"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -560,
-          976
-        ],
-        "id": "c6751a98-d063-4296-82b4-f1183445b0d4",
-        "name": "transform custormerName"
-      }
-    ],
-    "connections": {
-      "New Customer Webhook": {
-        "main": [
-          [
-            {
-              "node": "transform custormerName",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Validate Required Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Create HubSpot Contact": {
-        "main": [
-          [
-            {
-              "node": "Send Team Notification",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Send Welcome Email",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Send Welcome Email": {
-        "main": [
-          [
-            {
-              "node": "Wait 2 Hours",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait 2 Hours": {
-        "main": [
-          [
-            {
-              "node": "Send Onboarding Documents",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Send Onboarding Documents": {
-        "main": [
-          [
-            {
-              "node": "Wait 1 Day",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait 1 Day": {
-        "main": [
-          [
-            {
-              "node": "Update CRM Status",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Send Personal Check-in",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Send Personal Check-in": {
-        "main": [
-          [
-            {
-              "node": "Wait 2 More Days",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait 2 More Days": {
-        "main": [
-          [
-            {
-              "node": "Send Week 1 Success Guide",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Send Week 1 Success Guide": {
-        "main": [
-          [
-            {
-              "node": "Mark Week 1 Complete",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Notify Team of Completion",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Validate Required Fields": {
-        "main": [
-          [
-            {
-              "node": "Create HubSpot Contact",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Send Validation Error Alert",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "transform custormerName": {
-        "main": [
-          [
-            {
-              "node": "Validate Required Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
       }
     },
-    "pinData": {
-      "New Customer Webhook": [
-        {
-          "email": "sarah.johnson@email.com",
-          "phone": "+1-555-123-4567",
-          "source": "website",
-          "package": "Premium",
-          "signupDate": "2024-07-04",
-          "customerName": "Sarah Johnson"
-        }
+    {
+      "parameters": {
+        "fromEmail": "test@gmail.com",
+        "toEmail": "duckcute44112002@gmail.com",
+        "subject": "Welcome to [Company Name] - Your Journey Starts Here! 🎉",
+        "text": "Hello word",
+        "options": {}
+      },
+      "id": "84b99c4e-89a9-4c87-a695-512f82d85e95",
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        7808,
+        5184
       ],
-      "Create HubSpot Contact": [
-        {
-          "vid": 507004222186,
-          "canonical-vid": 507004222186,
-          "merged-vids": [],
-          "portal-id": 246556470,
-          "is-contact": true,
-          "properties": {
-            "hs_analytics_source_composite_data": {
-              "value": "[\"OFFLINE\",\"INTEGRATION\",\"43354579\"]",
-              "versions": [
-                {
-                  "value": "[\"OFFLINE\",\"INTEGRATION\",\"43354579\"]",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_latest_source": {
-              "value": "OFFLINE",
-              "versions": [
-                {
-                  "value": "OFFLINE",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "num_unique_conversion_events": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167052212,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_revenue": {
-              "value": "0.0",
-              "versions": [
-                {
-                  "value": "0.0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "createdate": {
-              "value": "1782167051395",
-              "versions": [
-                {
-                  "value": "1782167051395",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_membership_has_accessed_private_content": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_prospecting_agent_total_enrolled_count": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_registered_member": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_object_source_id": {
-              "value": "43354579",
-              "versions": [
-                {
-                  "value": "43354579",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_num_page_views": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_v2_date_entered_current_stage": {
-              "value": "1782167051395",
-              "versions": [
-                {
-                  "value": "1782167051395",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_latest_source_timestamp": {
-              "value": "1782167040000",
-              "versions": [
-                {
-                  "value": "1782167040000",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_average_page_views": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_all_contact_vids": {
-              "value": "507004222186",
-              "versions": [
-                {
-                  "value": "507004222186",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_latest_source_composite_data": {
-              "value": "[\"OFFLINE\",\"INTEGRATION\",\"43354579\"]",
-              "versions": [
-                {
-                  "value": "[\"OFFLINE\",\"INTEGRATION\",\"43354579\"]",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "phone": {
-              "value": "+1-555-123-4567",
-              "versions": [
-                {
-                  "value": "+1-555-123-4567",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782200937183,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_is_contact": {
-              "value": "true",
-              "versions": [
-                {
-                  "value": "true",
-                  "source-type": "CALCULATED",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "num_conversion_events": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167052212,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_object_id": {
-              "value": "507004222186",
-              "versions": [
-                {
-                  "value": "507004222186",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_num_event_completions": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_v2_date_entered_lead": {
-              "value": "1782167051395",
-              "versions": [
-                {
-                  "value": "1782167051395",
-                  "source-type": "CALCULATED",
-                  "source-id": "StageCalculatedPropertiesRollup",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_latest_source_data_2": {
-              "value": "43354579",
-              "versions": [
-                {
-                  "value": "43354579",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_is_unworked": {
-              "value": "true",
-              "versions": [
-                {
-                  "value": "true",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_latest_source_data_1": {
-              "value": "INTEGRATION",
-              "versions": [
-                {
-                  "value": "INTEGRATION",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "firstname": {
-              "value": "Sarah Johnson",
-              "versions": [
-                {
-                  "value": "Sarah Johnson",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782200937183,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_num_active_contracts": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_pipeline": {
-              "value": "contacts-lifecycle-pipeline",
-              "versions": [
-                {
-                  "value": "contacts-lifecycle-pipeline",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_social_num_broadcast_clicks": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_object_source_detail_1": {
-              "value": "n8n-client",
-              "versions": [
-                {
-                  "value": "n8n-client",
-                  "source-type": "INTERNAL_PROCESSING",
-                  "source-id": "RecordSourceDetailsWriterWorker",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167052183,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_messaging_engagement_score": {
-              "value": "0.35802025",
-              "versions": [
-                {
-                  "value": "0.35802025",
-                  "source-type": "EMAIL",
-                  "source-id": "MessagingContactEngagementScoreEvaluator",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782197718802,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_num_visits": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_associated_target_accounts": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_object_source_label": {
-              "value": "INTEGRATION",
-              "versions": [
-                {
-                  "value": "INTEGRATION",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_sequences_actively_enrolled_count": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_social_linkedin_clicks": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_source": {
-              "value": "OFFLINE",
-              "versions": [
-                {
-                  "value": "OFFLINE",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_prospecting_agent_actively_enrolled_count": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_searchable_calculated_phone_number": {
-              "value": "15551234567",
-              "versions": [
-                {
-                  "value": "15551234567",
-                  "source-type": "CALCULATED",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782200937186,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_email_domain": {
-              "value": "email.com",
-              "versions": [
-                {
-                  "value": "email.com",
-                  "source-type": "CALCULATED",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_currently_enrolled_in_prospecting_agent": {
-              "value": "false",
-              "versions": [
-                {
-                  "value": "false",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "email": {
-              "value": "sarah.johnson@email.com",
-              "versions": [
-                {
-                  "value": "sarah.johnson@email.com",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "start_date": {
-              "value": "2024-07-04",
-              "versions": [
-                {
-                  "value": "2024-07-04",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782200937183,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_v2_time_in_current_stage": {
-              "value": "1782167051395",
-              "versions": [
-                {
-                  "value": "1782167051395",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_num_associated_open_deals": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_first_timestamp": {
-              "value": "1782167040000",
-              "versions": [
-                {
-                  "value": "1782167040000",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "lastmodifieddate": {
-              "value": "1782200937186",
-              "versions": [
-                {
-                  "value": "1782200937186",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782200937186,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                },
-                {
-                  "value": "1782197718810",
-                  "source-type": "EMAIL",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782197718810,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                },
-                {
-                  "value": "1782167057046",
-                  "source-type": "ANALYTICS",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057046,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                },
-                {
-                  "value": "1782167056255",
-                  "source-type": "API",
-                  "source-id": null,
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167056255,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                },
-                {
-                  "value": "1782167052183",
-                  "source-type": "INTERNAL_PROCESSING",
-                  "source-id": "RecordSourceDetailsWriterWorker",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167052183,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                },
-                {
-                  "value": "1782167051395",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_full_name_or_email": {
-              "value": "Sarah Johnson",
-              "versions": [
-                {
-                  "value": "Sarah Johnson",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782200937186,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                },
-                {
-                  "value": "sarah.johnson@email.com",
-                  "source-type": "CALCULATED",
-                  "source-id": "CalculatedPropertyComputer",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_social_google_plus_clicks": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_social_facebook_clicks": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_object_source": {
-              "value": "INTEGRATION",
-              "versions": [
-                {
-                  "value": "INTEGRATION",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_source_data_2": {
-              "value": "43354579",
-              "versions": [
-                {
-                  "value": "43354579",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_social_twitter_clicks": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "hs_analytics_source_data_1": {
-              "value": "INTEGRATION",
-              "versions": [
-                {
-                  "value": "INTEGRATION",
-                  "source-type": "ANALYTICS",
-                  "source-id": "StateBasedPropertyCalculation",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167057036,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "lifecyclestage": {
-              "value": "lead",
-              "versions": [
-                {
-                  "value": "lead",
-                  "source-type": "INTEGRATION",
-                  "source-id": "43354579",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            },
-            "num_notes": {
-              "value": "0",
-              "versions": [
-                {
-                  "value": "0",
-                  "source-type": "CALCULATED",
-                  "source-id": "InitialRollupProperties",
-                  "source-label": null,
-                  "updated-by-user-id": null,
-                  "timestamp": 1782167051395,
-                  "selected": false,
-                  "data-sensitivity": null,
-                  "is-encrypted": null
-                }
-              ]
-            }
-          },
-          "form-submissions": [],
-          "list-memberships": [],
-          "identity-profiles": [
-            {
-              "vid": 507004222186,
-              "saved-at-timestamp": 1782167051589,
-              "deleted-changed-timestamp": 0,
-              "identities": [
-                {
-                  "type": "EMAIL",
-                  "value": "sarah.johnson@email.com",
-                  "timestamp": 1782167051395,
-                  "is-primary": true
-                },
-                {
-                  "type": "LEAD_GUID",
-                  "value": "9e760aa2-8f3c-4541-9def-b6acca954949",
-                  "timestamp": 1782167051586
-                }
-              ]
-            }
-          ],
-          "merge-audits": [],
-          "isNew": false
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "seconds"
+      },
+      "id": "2c5dbd35-7884-44ac-b2dd-c814b31e37e7",
+      "name": "Wait 2 Hours",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        8160,
+        5120
+      ],
+      "webhookId": "ed102052-76a3-4302-a179-f8e09d0f7aed",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fromEmail": "test@gmail.com",
+        "toEmail": "duckcute44112002@gmail.com",
+        "subject": "Your Onboarding Documents Are Ready! 📋",
+        "text": "hello word 2",
+        "options": {}
+      },
+      "id": "d57e7262-0342-4b69-a980-06828d1d48b7",
+      "name": "Send Onboarding Documents",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        8416,
+        5104
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "unit": "seconds"
+      },
+      "id": "675271d6-f020-407e-8340-d7778cae04ca",
+      "name": "Wait 1 Day",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        8704,
+        5104
+      ],
+      "webhookId": "c37979cb-b222-4f35-a0f9-b7dff99ccea8",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "resource": "contact",
+        "email": "={{ $('New Customer Webhook').item.json.email }}",
+        "additionalFields": {
+          "startDate": "={{ $today.format('yyyy-MM-dd') }}"
         }
+      },
+      "id": "093c6b38-9437-4165-bbef-70bd04ec4074",
+      "name": "Update CRM Status",
+      "type": "n8n-nodes-base.hubspot",
+      "position": [
+        9008,
+        5008
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fromEmail": "test@gmail.com",
+        "toEmail": "duckcute44112002@gmail.com",
+        "subject": "How's your first day going? 🌟",
+        "text": "Hello world 3",
+        "options": {
+          "replyTo": "user@example.com"
+        }
+      },
+      "id": "c85ecf64-af5b-4f44-a239-2415709f96b9",
+      "name": "Send Personal Check-in",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        9008,
+        5200
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "seconds"
+      },
+      "id": "f8986f11-567e-4f6c-b552-2d6b1bac1eb9",
+      "name": "Wait 2 More Days",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        9312,
+        5104
+      ],
+      "webhookId": "4d254f31-2974-4d7b-8669-0f1df857209a",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "fromEmail": "test@gmail.com",
+        "toEmail": "duckcute44112002@gmail.com",
+        "subject": "Your Week 1 Success Guide + Exclusive Training 🎯",
+        "text": "hehe",
+        "options": {}
+      },
+      "id": "20d7a496-9925-40a6-9e49-4733fedadecf",
+      "name": "Send Week 1 Success Guide",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        9872,
+        5088
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "resource": "contact",
+        "email": "={{ $('New Customer Webhook').item.json.email }}",
+        "additionalFields": {}
+      },
+      "id": "f43450db-88f0-4be2-8c16-bd7ec01c25b4",
+      "name": "Mark Week 1 Complete",
+      "type": "n8n-nodes-base.hubspot",
+      "position": [
+        10096,
+        4848
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "chatId": "<GROUP_ID>",
+        "text": "Congrate! Sarah Johnson is aldready done the first week",
+        "additionalFields": {}
+      },
+      "id": "a118b4d2-61a1-4be3-af53-089f3cd3520f",
+      "name": "Notify Team of Completion",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        10144,
+        5280
+      ],
+      "webhookId": "00e4a472-30f4-4f63-a96e-8c3deb69c704",
+      "typeVersion": 1,
+      "credentials": {
+        "telegramApi": {
+          "id": "UU6AEXBZ5P5JdLxv",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1f5e1a0-8c2e-4d1f-9b3a-7e6d5c4b3a21",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "leftValue": "={{ $json.email }}",
+              "rightValue": ""
+            },
+            {
+              "id": "d2g6f2b1-9d3f-5e2g-ac4b-8f7e6d5c4b32",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "leftValue": "={{ $json.customerName }}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5c3add08-2f34-4f79-87ca-642ca521b879",
+      "name": "Validate Required Fields",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        7280,
+        5120
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "chatId": "=<GROUP_ID>",
+        "text": "Check your required data!",
+        "additionalFields": {}
+      },
+      "id": "0e8996c1-8e34-49a2-b491-ca8fd1f2c762",
+      "name": "Send Validation Error Alert",
+      "type": "n8n-nodes-base.telegram",
+      "position": [
+        7472,
+        5424
+      ],
+      "webhookId": "70027811-eb7c-4092-a728-e161bca136b5",
+      "typeVersion": 1,
+      "credentials": {
+        "telegramApi": {
+          "id": "UU6AEXBZ5P5JdLxv",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const customerName = $input.first().json.customerName;\nvar firstName = customerName.split(' ')[0];\nvar lastName = customerName.split(' ')[1] || '';\n\nreturn {\n  firstName,\n  lastName\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        7104,
+        5232
+      ],
+      "id": "651779d8-944d-455c-8c91-c8dd5af7ac9e",
+      "name": "transform custormerName"
+    }
+  ],
+  "connections": {
+    "New Customer Webhook": {
+      "main": [
+        [
+          {
+            "node": "transform custormerName",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "meta": {
-      "templateCredsSetupCompleted": true,
-      "instanceId": "d8ee7e108d01cf09893dd8853d1c18d7e9a83ebaa9049e005c6a959d608b3875"
+    "Create HubSpot Contact": {
+      "main": [
+        [
+          {
+            "node": "Send Team Notification",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Welcome Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Welcome Email": {
+      "main": [
+        [
+          {
+            "node": "Wait 2 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2 Hours": {
+      "main": [
+        [
+          {
+            "node": "Send Onboarding Documents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Onboarding Documents": {
+      "main": [
+        [
+          {
+            "node": "Wait 1 Day",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 1 Day": {
+      "main": [
+        [
+          {
+            "node": "Update CRM Status",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Personal Check-in",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Personal Check-in": {
+      "main": [
+        [
+          {
+            "node": "Wait 2 More Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2 More Days": {
+      "main": [
+        [
+          {
+            "node": "Send Week 1 Success Guide",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Week 1 Success Guide": {
+      "main": [
+        [
+          {
+            "node": "Mark Week 1 Complete",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notify Team of Completion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Required Fields": {
+      "main": [
+        [
+          {
+            "node": "Create HubSpot Contact",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Validation Error Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transform custormerName": {
+      "main": [
+        [
+          {
+            "node": "Validate Required Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
+  },
+  "pinData": {
+    "New Customer Webhook": [
+      {
+        "email": "sarah.johnson@email.com",
+        "phone": "+1-555-123-4567",
+        "source": "website",
+        "package": "Premium",
+        "signupDate": "2024-07-04",
+        "customerName": "Sarah Johnson"
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d8ee7e108d01cf09893dd8853d1c18d7e9a83ebaa9049e005c6a959d608b3875"
   }
+}

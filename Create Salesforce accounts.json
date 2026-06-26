@@ -13,13 +13,7 @@
         ],
         "id": "ddd789ef-2e26-43a7-8134-ef4eac098133",
         "name": "Get Exist Account",
-        "alwaysOutputData": true,
-        "credentials": {
-          "salesforceOAuth2Api": {
-            "id": "Os22NsGtoQjbG6Fz",
-            "name": "Salesforce account"
-          }
-        }
+        "alwaysOutputData": true
       },
       {
         "parameters": {
@@ -34,13 +28,7 @@
           -432
         ],
         "id": "ad507daa-4bd0-4fcd-a380-714aad5327c1",
-        "name": "Create an account",
-        "credentials": {
-          "salesforceOAuth2Api": {
-            "id": "Os22NsGtoQjbG6Fz",
-            "name": "Salesforce account"
-          }
-        }
+        "name": "Create an account"
       },
       {
         "parameters": {
@@ -61,13 +49,7 @@
           -192
         ],
         "id": "3bfc5ef1-825d-4e7d-af57-59dbd79b3fd1",
-        "name": "Create or update a contact",
-        "credentials": {
-          "salesforceOAuth2Api": {
-            "id": "Os22NsGtoQjbG6Fz",
-            "name": "Salesforce account"
-          }
-        }
+        "name": "Create or update a contact"
       },
       {
         "parameters": {
@@ -228,13 +210,7 @@
           -64
         ],
         "id": "12a107da-c391-4231-b394-7ea9360fe011",
-        "name": "Read Google Sheet",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "6cEBAJoaH92JyHdr",
-            "name": "personal client"
-          }
-        }
+        "name": "Read Google Sheet"
       },
       {
         "parameters": {
@@ -441,13 +417,7 @@
           192
         ],
         "id": "b239f8f4-4e04-4259-b130-818c210d8b26",
-        "name": "Update Failed Record",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "6cEBAJoaH92JyHdr",
-            "name": "personal client"
-          }
-        }
+        "name": "Update Failed Record"
       },
       {
         "parameters": {
@@ -583,13 +553,7 @@
           -192
         ],
         "id": "6ece8110-31a1-4a42-a51d-95b83bf9363c",
-        "name": "Update success record",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "6cEBAJoaH92JyHdr",
-            "name": "personal client"
-          }
-        }
+        "name": "Update success record"
       },
       {
         "parameters": {
