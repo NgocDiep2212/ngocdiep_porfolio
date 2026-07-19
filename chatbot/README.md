@@ -25,19 +25,44 @@ Open http://localhost:3000 — static portfolio + `/api/chat`.
 
 Optional: `npm run dev:vercel` if you want Vercel CLI (requires `npx vercel login` with the [new OAuth device flow](https://vercel.com/changelog/new-vercel-cli-login-flow); upgrade with `npm i vercel@latest -D`).
 
-6. Deploy API to Vercel when ready:
+6. Deploy to Vercel (CLI):
 
 ```bash
+npm i vercel@latest -D
+npx vercel login
+# browser OAuth device flow — approve, then:
 npx vercel
+# production:
+npx vercel --prod
 ```
 
-Set the same env vars in the Vercel project dashboard.
+Set **Environment Variables** in Vercel Project → Settings → Environment Variables (Production + Preview):
 
-7. Chat widget calls `/api/chat` by default (same origin). Override with:
+| Name | Example |
+|------|---------|
+| `GOOGLE_API_KEY` | from AI Studio |
+| `QDRANT_URL` | `https://xxx.qdrant.io` |
+| `QDRANT_API_KEY` | Qdrant key |
+| `QDRANT_COLLECTION` | `portfolio_kb` |
+| `EMBEDDING_MODEL` | `gemini-embedding-001` |
+| `CHAT_MODEL` | `gemini-2.5-flash` |
+| `RAG_TOP_K` | `6` |
+| `RAG_SCORE_THRESHOLD` | `0.55` |
+| `ALLOWED_ORIGINS` | `https://your-app.vercel.app,https://ngocdiep.dev` |
+
+Redeploy after adding env vars.
+
+**Same-origin (recommended):** host this whole repo on Vercel → chat uses `/api/chat` (no meta change).
+
+**Portfolio elsewhere** (e.g. GitHub Pages / ngocdiep.dev): point the widget at the Vercel API:
 
 ```html
 <meta name="portfolio-chat-api" content="https://YOUR-APP.vercel.app/api/chat" />
 ```
+
+And include that portfolio origin in `ALLOWED_ORIGINS`.
+
+> Ingest (`npm run ingest`) vẫn chạy **local** (hoặc CI) — không chạy trên Vercel. KB phải đã có trong Qdrant trước khi chat production.
 
 ## Knowledge updates
 
