@@ -1,0 +1,134 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            }
+          ]
+        }
+      },
+      "id": "c055762a-8fe7-4141-a639-df2372f30060",
+      "typeVersion": 1.1,
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [272, 352]
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "test-collection",
+          "mode": "list",
+          "cachedResultName": "test-collection"
+        },
+        "prompt": "={{ $json.query }}",
+        "topK": 8,
+        "useReranker": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [528, 352],
+      "id": "2fab5e32-0467-44ab-aa69-ef5ea3fa8af1",
+      "name": "Qdrant Vector Store",
+      "credentials": {
+        "qdrantApi": {
+          "id": "70yWEG6RKb5QPDd1",
+          "name": "Qdrant account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [672, 560],
+      "id": "9cd42f61-a296-4d29-ad7a-ee255572ee8b",
+      "name": "Reranker Cohere",
+      "credentials": {
+        "cohereApi": {
+          "id": "JaaAdwloiNdwmuNw",
+          "name": "Cohere account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [576, 560],
+      "id": "5c774648-0784-4b10-abf3-7eba40bc30d1",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "wLdGO7xCszShPJfD",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all().map(item => item.json);\n\n// Sort by score descending (Cohere rerank relevance score, higher = more relevant)\nresults.sort((a, b) => b.score - a.score);\n\nconst topScore = results[0]?.score ?? 0;\n\n// NOTE: Cohere rerank scores are NOT plain cosine similarity — they tend to\n// compress low even for topically-adjacent (but not exact) matches.\n// Thresholds below need calibration with real \"good match\" queries — see below.\nlet retrievalConfidence;\nif (topScore >= 0.5) retrievalConfidence = \"high\";\nelse if (topScore >= 0.15) retrievalConfidence = \"medium\";\nelse retrievalConfidence = \"low\";\n\nconst relevantDocs = results.filter(r => r.score >= 0.05);\n\nreturn {\n  json: {\n    documents: relevantDocs.map(r => ({\n      content: r.document.pageContent,\n      source: r.document.metadata.source\n    })),\n    retrievalConfidence\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 352],
+      "id": "8ebc6434-66d1-4d0f-ae5c-de76ac35642a",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reranker Cohere": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

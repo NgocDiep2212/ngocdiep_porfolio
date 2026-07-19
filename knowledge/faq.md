@@ -32,12 +32,12 @@ A: Yes. English at professional reading and writing level (VSTEP B2 CEFR). Vietn
 
 ## Q: What makes Diep different?
 
-A: Combines fullstack/API background with hands-on AI automation: RAG with no-hallucination rules, human-in-the-loop gates, idempotent CRM syncs, and measured LLM cost/latency optimization (e.g. Job Matcher 8× fewer tokens).
+A: Combines fullstack/API background with hands-on AI automation: RAG with Qdrant + Cohere rerank and confidence-gated escalation (no hallucination), human-in-the-loop gates, idempotent CRM syncs, and measured LLM cost/latency optimization (e.g. Job Matcher 8× fewer tokens).
 
 ## Q: What n8n and RAG projects has Diep built?
 
 A: Key portfolio projects using n8n and/or RAG:
-1) AI Support Triage & RAG Response Pipeline — n8n + Gmail + Gemini + Qdrant RAG + HubSpot + Telegram HITL (triage under 30s).
+1) AI Support Triage & RAG Response Pipeline — n8n + Gmail + Gemini + Qdrant + Cohere rerank + HubSpot + Telegram HITL; confidence-gated escalation (triage under 30s).
 2) Salesforce Account & Contact Sync — n8n + Google Sheets + SOQL dedup + Salesforce upsert + audit trail.
 3) AI Content Pipeline — n8n integrating Leonardo AI, TikTok, Zalo OA with human approval.
 4) Customer Onboarding Automation — n8n + HubSpot + 5-touch email drip.

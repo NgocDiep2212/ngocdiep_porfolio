@@ -8,7 +8,7 @@ updated: 2026-07-19
 
 ## AI & Automation
 
-n8n, CrewAI, Zenior, Blotato, RAG Pipelines, LLM Orchestration, Function Calling, Gemini API, Claude API, Qdrant, Vector Search, Prompt Engineering, Latency & Cost Optimization, Leonardo AI.
+n8n, CrewAI, Zenior, Blotato, RAG Pipelines, LLM Orchestration, Function Calling, Gemini API, Claude API, Qdrant, Cohere Rerank, Vector Search, Prompt Engineering, Latency & Cost Optimization, Leonardo AI.
 
 ## CRM & Integrations
 

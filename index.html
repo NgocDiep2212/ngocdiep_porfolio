@@ -2339,6 +2339,7 @@ footer {
           <span class="stag stag-teal">Gemini API</span>
           <span class="stag stag-teal">Claude API</span>
           <span class="stag stag-teal">Qdrant</span>
+          <span class="stag stag-teal">Cohere Rerank</span>
           <span class="stag stag-teal">Vector Search</span>
           <span class="stag stag-teal">Leonardo AI</span>
         </div>
@@ -2415,9 +2416,9 @@ footer {
 
       <!-- CARD 1: AI Support Triage -->
       <article class="pcard pcard-hero" id="support-triage">
-        <div class="pcard-badge badge-ai">Featured · n8n + AI + RAG</div>
+        <div class="pcard-badge badge-ai">Featured · n8n + RAG + Rerank</div>
         <h3 class="pcard-name">AI Support Triage &amp; RAG Response Pipeline</h3>
-        <p class="pcard-value">Gmail intake → AI classify → RAG knowledge search → HubSpot ticket → human-approved reply. Zero manual routing.</p>
+        <p class="pcard-value">Gmail intake → Gemini triage → HubSpot ticket → Qdrant + Cohere rerank RAG → confidence-gated draft → Telegram HITL reply.</p>
 
         <!-- Mini workflow preview -->
         <div class="mini-flow" aria-hidden="true">
@@ -2425,9 +2426,11 @@ footer {
           <div class="mini-flow-nodes">
             <div class="mf-chip"><span class="mf-icon" style="background:#FEF3C7">✉</span>Gmail</div>
             <span class="mf-arrow">→</span>
-            <div class="mf-chip"><span class="mf-icon" style="background:#CCFBF1">🤖</span>AI Triage</div>
+            <div class="mf-chip"><span class="mf-icon" style="background:#CCFBF1">🤖</span>Triage</div>
             <span class="mf-arrow">→</span>
             <div class="mf-chip"><span class="mf-icon" style="background:#EEF2FF">🔍</span>Qdrant</div>
+            <span class="mf-arrow">→</span>
+            <div class="mf-chip"><span class="mf-icon" style="background:#FCE7F3">↕</span>Rerank</div>
             <span class="mf-arrow">→</span>
             <div class="mf-chip"><span class="mf-icon" style="background:#FFEDD5">🏢</span>HubSpot</div>
             <span class="mf-arrow">→</span>
@@ -2437,12 +2440,12 @@ footer {
 
         <div class="pcard-stack">
           <span class="stk">n8n</span><span class="stk">Gmail</span><span class="stk">Gemini</span>
-          <span class="stk">Qdrant</span><span class="stk">HubSpot</span><span class="stk">Telegram</span>
+          <span class="stk">Qdrant</span><span class="stk">Cohere</span><span class="stk">HubSpot</span><span class="stk">Telegram</span>
         </div>
         <ul class="pcard-bullets">
-          <li>AI triage classifies every inbound email: category, priority, sentiment, and recommended team — structured JSON output, validated before action.</li>
-          <li>RAG retrieval searches company knowledge base before drafting reply — AI escalates to human when KB lacks a confident answer.</li>
-          <li>Telegram approval gate before any customer email is sent; ticket pipeline stages updated automatically on approve or reject.</li>
+          <li>AI triage classifies every inbound email: category, priority, sentiment, and recommended team — structured JSON, validated before action.</li>
+          <li>RAG via a dedicated retrieve sub-workflow: Qdrant + Gemini embeddings + Cohere rerank; <code>retrievalConfidence</code> drives escalation when the KB match is weak — no hallucinated answers.</li>
+          <li>Telegram approval before any customer email is sent; HubSpot pipeline stages for waiting-on-us vs waiting-on-customer.</li>
         </ul>
         <div class="pcard-metrics">
           <span class="pcard-metric"><span class="pcard-metric-val">&lt;30s</span> triage per email</span>
@@ -2450,7 +2453,8 @@ footer {
           <span class="pcard-metric"><span class="pcard-metric-val">0</span> manual routing steps</span>
         </div>
         <div class="pcard-links" style="margin-top:14px">
-          <a href="./AI Customer Support Triage System.json" class="plink" download>↓ n8n JSON</a>
+          <a href="./AI Customer Support Triage System.json" class="plink" download>↓ Main workflow</a>
+          <a href="./Retrieve Document.json" class="plink" download>↓ Retrieve sub-workflow</a>
         </div>
       </article>
 

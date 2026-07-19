@@ -459,14 +459,15 @@
 
         <div class="project-item">
           <div class="project-name">AI Support Triage &amp; RAG Response Pipeline</div>
-          <div class="project-stack">n8n · Gmail · Google Gemini · Qdrant · HubSpot CRM · Telegram · Human-in-the-Loop</div>
+          <div class="project-stack">n8n · Gmail · Gemini · Qdrant · Cohere Rerank · HubSpot · Telegram · HITL</div>
           <ul class="project-bullets">
-            <li>Built <strong>n8n</strong> workflow: <strong>Gmail</strong> intake → <strong>Gemini AI</strong> triage (category / priority / sentiment / team routing) → <strong>HubSpot</strong> ticket create/update with full contact resolution.</li>
-            <li>Implemented <strong>RAG retrieval</strong> (<strong>Qdrant</strong> + Gemini embeddings) with strict no-hallucination rules — AI answers only from uploaded company knowledge base, escalates when KB is insufficient.</li>
-            <li>Reduced manual ticket classification from <strong>~5 minutes to under 30 seconds</strong> per inbound email; <strong>Telegram</strong> approval gate before every customer reply is sent.</li>
+            <li>Built <strong>n8n</strong> workflow: <strong>Gmail</strong> intake → <strong>Gemini</strong> triage (category / priority / sentiment / team) → <strong>HubSpot</strong> ticket create/update with contact resolution.</li>
+            <li>RAG via dedicated retrieve sub-workflow: <strong>Qdrant</strong> + Gemini embeddings + <strong>Cohere rerank</strong>; <strong>retrievalConfidence</strong> gates answers — escalate to human when confidence is low (no hallucination).</li>
+            <li>Reduced manual triage from <strong>~5 minutes to under 30 seconds</strong>; <strong>Telegram</strong> approval before reply; HubSpot stages for waiting-on-us vs waiting-on-customer.</li>
           </ul>
           <div class="project-links">
             <a class="plink" href="AI Customer Support Triage System.json" download>↓ n8n JSON</a>
+            <a class="plink" href="Retrieve Document.json" download>↓ Retrieve JSON</a>
             <a class="plink" href="./index.html#support-triage">◇ Portfolio</a>
           </div>
         </div>
@@ -508,6 +509,7 @@
               <span class="stag stag-teal">Gemini API</span>
               <span class="stag stag-teal">Claude API</span>
               <span class="stag stag-teal">Qdrant</span>
+              <span class="stag stag-teal">Cohere Rerank</span>
               <span class="stag stag-teal">Vector Search</span>
               <span class="stag stag-teal">Prompt Engineering</span>
               <span class="stag stag-teal">Latency &amp; Cost Optimization</span>

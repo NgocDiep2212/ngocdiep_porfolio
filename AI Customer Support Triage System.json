@@ -14,11 +14,11 @@
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1.4,
       "position": [
-        -1920,
-        96
+        -720,
+        4144
       ],
-      "id": "3b525399-f78e-48a6-8648-949b20f4800f",
-      "name": "Gmail Trigger",
+      "id": "147eefba-fa24-48a1-8d1f-610762793312",
+      "name": "Gmail Trigger1",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
@@ -33,7 +33,7 @@
         "messages": {
           "values": [
             {
-              "content": "=Analyze the following support request:\n\nSubject:\n{{ $('Gmail Trigger').item.json.Subject }}\n\nCustomer:\n{{ $json.name }}\n\nMessage:\n{{ $('Gmail Trigger').item.json.snippet }}"
+              "content": "=Analyze the following support request:\n\nSubject:\n{{ $('Gmail Trigger1').item.json.Subject }}\n\nCustomer:\n{{ $json.name }}\n\nMessage:\n{{ $('Gmail Trigger1').item.json.snippet }}"
             }
           ]
         },
@@ -46,41 +46,41 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
       "position": [
-        -1472,
-        32
+        -272,
+        4080
       ],
-      "id": "0a746594-75a5-40d6-a5de-ad007291429d",
-      "name": "Message a model",
+      "id": "c3812f6d-c6bc-4048-8f91-8b5c32892897",
+      "name": "Message a model1",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "return {\n  ...JSON.parse($input.item.json.content.parts[0].text),\n  messageId: $('Gmail Trigger').item.json.id\n};"
+        "jsCode": "return {\n  ...JSON.parse($input.item.json.content.parts[0].text),\n  messageId: $('Gmail Trigger1').item.json.id\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1120,
-        32
+        80,
+        4080
       ],
-      "id": "6b0da8b3-673c-48d5-89e1-ddebb68fb5c8",
-      "name": "Parse Json Result"
+      "id": "bce5bce8-5ac9-46dc-a54e-ebb7890f5869",
+      "name": "Parse Json Result1"
     },
     {
       "parameters": {
         "content": "### 📚 Load Data Flow",
-        "height": 524,
+        "height": 572,
         "width": 1276,
         "color": 7
       },
-      "id": "3871019d-62a7-411f-aa0f-3114e944ad57",
-      "name": "Sticky Note1",
+      "id": "d0aba748-20db-4480-825c-c11356cda123",
+      "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2336,
-        480
+        -448,
+        4416
       ],
       "typeVersion": 1
     },
@@ -92,11 +92,11 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.1,
       "position": [
-        1568,
-        320
+        2752,
+        4464
       ],
-      "id": "f7eea5b5-9835-419c-a9db-a9e3a44a31c9",
-      "name": "Google Gemini Chat Model"
+      "id": "e5c35aba-1311-42a8-8004-e7c988b6b2ff",
+      "name": "Google Gemini Chat Model3"
     },
     {
       "parameters": {
@@ -106,51 +106,51 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.1,
       "position": [
-        2496,
-        320
+        3760,
+        4416
       ],
-      "id": "1cd6c319-5a41-4c2b-a1e2-6ddcda91b6e5",
-      "name": "Google Gemini Chat Model1"
+      "id": "44f16fcf-f511-4ca7-a94a-fde5232cc0eb",
+      "name": "Google Gemini Chat Model4"
     },
     {
       "parameters": {
         "operation": "reply",
-        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "messageId": "={{ $('Gmail Trigger1').item.json.id }}",
         "emailType": "text",
-        "message": "={{ $('Mail Content Agent').item.json.output }}",
+        "message": "={{ $('Mail Content Agent1').item.json.output }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        3216,
-        0
+        4560,
+        4144
       ],
-      "id": "6cbf5e37-d0d1-469b-adf6-39e675de0950",
-      "name": "Reply to a message",
-      "webhookId": "2b2eec90-97ef-48ce-bb6b-0b2275a05dd4",
+      "id": "caa54520-f21b-4f27-8a91-b3adb2e2440d",
+      "name": "Reply to a message1",
+      "webhookId": "",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $('Gmail Trigger').item.json.threadId }}",
+        "sessionKey": "={{ $('Gmail Trigger1').item.json.threadId }}",
         "contextWindowLength": 10
       },
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.4,
       "position": [
-        1696,
-        320
+        2896,
+        4464
       ],
-      "id": "09e93eba-e881-42d4-a23b-b6e7476209e8",
-      "name": "Simple Memory"
+      "id": "0a6fa10b-3546-4b3c-8e6e-a34747f4212a",
+      "name": "Simple Memory1"
     },
     {
       "parameters": {
         "operation": "sendAndWait",
-        "chatId": "<GROUP_ID>",
+        "chatId": "",
         "message": "={{ $json.output }}",
         "approvalOptions": {
           "values": {
@@ -170,11 +170,11 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2768,
-        96
+        4112,
+        4240
       ],
-      "id": "999333d2-059e-4828-9f0b-5ea79b8d2b89",
-      "name": "Send message and wait for response",
+      "id": "6da0adff-7856-4b4e-a11a-53ccdf74ad1b",
+      "name": "Send message and wait for response1",
       "webhookId": "ce7bb50a-a632-42cb-9e87-530b498b10d8",
       "retryOnFail": true,
       "waitBetweenTries": 3000
@@ -187,17 +187,17 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"filterGroups\": [\n    {\n      \"filters\": [\n        {\n          \"propertyName\": \"gmail_thread_id\",\n          \"operator\": \"EQ\",\n          \"value\": \"{{ $('Gmail Trigger').item.json.threadId }}\"\n        }\n      ]\n    }\n  ]\n}",
+        "jsonBody": "={\n  \"filterGroups\": [\n    {\n      \"filters\": [\n        {\n          \"propertyName\": \"gmail_thread_id\",\n          \"operator\": \"EQ\",\n          \"value\": \"{{ $('Gmail Trigger1').item.json.threadId }}\"\n        }\n      ]\n    }\n  ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        448,
-        96
+        1648,
+        4144
       ],
-      "id": "53a3ccf3-ecbf-4f80-8bac-32946cf96d2f",
-      "name": "Search ticket",
+      "id": "8deb458a-ba20-4252-8202-a99a09d3568f",
+      "name": "Search ticket1",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
@@ -209,11 +209,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1696,
-        32
+        -496,
+        4080
       ],
-      "id": "0cb8a262-ea34-4fc7-bba1-c2f501cfae2a",
-      "name": "Split User Name and Email"
+      "id": "efb6a089-7083-48ca-b30f-dc37683bed40",
+      "name": "Split User Name and Email1"
     },
     {
       "parameters": {
@@ -223,102 +223,39 @@
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"properties\": {\n    \"subject\": \"[{{ $('Merge User Input Data').item.json.category }}] {{ $('Merge User Input Data').item.json.Subject }} - {{ $('Split User Name and Email').item.json.name }}\",\n    \"content\": \"{{ $('Parse Json Result').item.json.summary }}\",\n    \"hs_pipeline\": \"0\",\n    \"hs_pipeline_stage\": \"1\",\n    \"hs_ticket_priority\": \"{{ $('Parse Json Result').item.json.priority.toUpperCase() }}\",\n    \"source_type\": \"EMAIL\",\n    \"hs_ticket_category\": \"{{ $('Parse Json Result').item.json.category.toUpperCase() }}\",\n    \"hs_assigned_team_ids\": \"{{ $('Parse Json Result').item.json.recommendedTeam }}\",\n    \"gmail_thread_id\": \"{{ $('Gmail Trigger').item.json.threadId }}\",\n    \"createdate\": \"{{ $today }}\"\n  },\n   \"associations\": [\n    {\n      \"to\": {\n        \"id\": \"{{ $('Get User Contact ID').first().json.contact_id }}\" \n      },\n      \"types\": [\n        {\n          \"associationCategory\": \"HUBSPOT_DEFINED\",\n          \"associationTypeId\": 16\n        }\n      ]\n    }\n  ]\n}",
+        "jsonBody": "={\n  \"properties\": {\n    \"subject\": \"[{{ $('Merge User Input Data1').item.json.category }}] {{ $('Merge User Input Data1').item.json.Subject }} - {{ $('Split User Name and Email1').item.json.name }}\",\n    \"content\": \"{{ $('Parse Json Result1').item.json.summary }}\",\n    \"hs_pipeline\": \"0\",\n    \"hs_pipeline_stage\": \"1\",\n    \"hs_ticket_priority\": \"{{ $('Parse Json Result1').item.json.priority.toUpperCase() }}\",\n    \"source_type\": \"EMAIL\",\n    \"hs_ticket_category\": \"{{ $('Parse Json Result1').item.json.category.toUpperCase() }}\",\n    \"hs_assigned_team_ids\": \"{{ $('Parse Json Result1').item.json.recommendedTeam }}\",\n    \"gmail_thread_id\": \"{{ $('Gmail Trigger1').item.json.threadId }}\",\n    \"createdate\": \"{{ $today }}\"\n  },\n   \"associations\": [\n    {\n      \"to\": {\n        \"id\": \"{{ $('Get User Contact ID1').first().json.contact_id }}\" \n      },\n      \"types\": [\n        {\n          \"associationCategory\": \"HUBSPOT_DEFINED\",\n          \"associationTypeId\": 16\n        }\n      ]\n    }\n  ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        896,
-        0
+        2096,
+        4048
       ],
-      "id": "838fe887-0ee0-4745-8a50-7e6acaa38448",
-      "name": "Create Ticket",
+      "id": "339bc470-be0e-478b-b2df-0b7e7de4c9f7",
+      "name": "Create Ticket1",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
     {
       "parameters": {
         "method": "PATCH",
-        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Set Exist Ticket ID').first().json.ticket_id }}",
+        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Set Exist Ticket ID1').first().json.ticket_id }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"properties\": {\n    \"subject\": \"[{{ $('Merge User Input Data').item.json.category }}] {{ $('Merge User Input Data').item.json.Subject }} - {{ $('Split User Name and Email').item.json.name }}\",\n    \"content\": \"{{ $('Parse Json Result').item.json.summary }}\",\n    \"hs_pipeline\": \"0\",\n    \"hs_pipeline_stage\": \"3\",\n    \"hs_ticket_priority\": \"{{ $('Parse Json Result').item.json.priority.toUpperCase() }}\",\n    \"source_type\": \"EMAIL\",\n    \"hs_ticket_category\": \"{{ $('Parse Json Result').item.json.category.toUpperCase() }}\",\n    \"hs_assigned_team_ids\": \"{{ $('Parse Json Result').item.json.recommendedTeam }}\"\n  }\n}",
+        "jsonBody": "={\n  \"properties\": {\n    \"subject\": \"[{{ $('Merge User Input Data1').item.json.category }}] {{ $('Merge User Input Data1').item.json.Subject }} - {{ $('Split User Name and Email1').item.json.name }}\",\n    \"content\": \"{{ $('Parse Json Result1').item.json.summary }}\",\n    \"hs_pipeline\": \"0\",\n    \"hs_pipeline_stage\": \"3\",\n    \"hs_ticket_priority\": \"{{ $('Parse Json Result1').item.json.priority.toUpperCase() }}\",\n    \"source_type\": \"EMAIL\",\n    \"hs_ticket_category\": \"{{ $('Parse Json Result1').item.json.category.toUpperCase() }}\",\n    \"hs_assigned_team_ids\": \"{{ $('Parse Json Result1').item.json.recommendedTeam }}\"\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
-        1120,
-        192
+        2320,
+        4240
       ],
-      "id": "ff6f94c7-7af9-4113-a7e0-5272e0d19f86",
-      "name": "Update ticket",
-      "retryOnFail": true,
-      "waitBetweenTries": 3000
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=Customer Information:\n\nName:\n{{ $('Gmail Trigger').item.json.From }}\n\nPlan:\n{{ $('Merge User Input Data').item.json.sentiment }}\n\nTicket Category:\n{{ $('Merge User Input Data').item.json.category }}\n\nPriority:\n{{ $('Merge User Input Data').item.json.priority }}\n\nCustomer Message:\n\n{{ $('Gmail Trigger').item.json.snippet }}\n\nKnowledge Base Context:\n\n{{ $('AI Agent Support Content').first().json.output }}\n\nGenerate an email response.",
-        "options": {
-          "systemMessage": "You are a professional customer support email writer.\n\nYour responsibility is to create a customer-facing email draft.\n\nRules:\n\nUse only the information provided in the context.\nNever invent company policies, pricing, or product features.\nMaintain a professional, friendly, and empathetic tone.\nAddress the customer by name when available.\nKeep responses concise and actionable.\nClearly explain next steps if human review is required.\nGenerate:\nonly email body, not include the subject\nReturn strutured text for human preview.\n\nEmail structure:\n\nGreeting\nAcknowledgement\nAnswer based on provided context\nNext steps\nProfessional closing"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3.1,
-      "position": [
-        2416,
-        96
-      ],
-      "id": "54bd2137-56ef-4a9b-949a-0157c051fec3",
-      "name": "Mail Content Agent",
-      "retryOnFail": true,
-      "waitBetweenTries": 3000
-    },
-    {
-      "parameters": {
-        "method": "PATCH",
-        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Resolve Ticket ID').item.json.ticket_id }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"properties\": {\n    \"hs_pipeline_stage\": \"2\"\n  }\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        3440,
-        0
-      ],
-      "id": "16880564-4f9f-4c46-969a-a4361fd8a88d",
-      "name": "Update ticket status",
-      "retryOnFail": true,
-      "waitBetweenTries": 3000
-    },
-    {
-      "parameters": {
-        "method": "PATCH",
-        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Resolve Ticket ID').item.json.ticket_id }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"properties\": {\n    \"hs_pipeline_stage\": \"3\"\n  }\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.4,
-      "position": [
-        3216,
-        192
-      ],
-      "id": "cfa9b982-afa2-41c4-9471-b0fa8dba8007",
-      "name": "Update ticket status2",
+      "id": "21d49b1f-e824-4919-b9ed-e4bc923e7a56",
+      "name": "Update ticket1",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
@@ -336,49 +273,49 @@
         },
         "options": {}
       },
-      "id": "51388390-a4f2-4e38-82c5-efa99ee3c519",
-      "name": "Upload your file here",
+      "id": "56b4b114-bf1c-4683-8fd2-badc32ec5818",
+      "name": "Upload your file here1",
       "type": "n8n-nodes-base.formTrigger",
       "position": [
-        -1920,
-        640
+        -144,
+        4512
       ],
-      "webhookId": "184e3f2c-524c-4ddb-bd56-2a37dd779b6b",
+      "webhookId": "366b81cc-3691-4368-9704-713b1c32fe4a",
       "typeVersion": 2.2
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "=User Name:  {{ $('Gmail Trigger').item.json.From.split(\"<\")[0] }}\nSummary:\n{{ $('Parse Json Result').item.json.summary }}\nContent:\n{{ $('Gmail Trigger').item.json.Subject }}\n{{ $('Gmail Trigger').item.json.snippet }}",
+        "text": "=User Name:  {{ $('Gmail Trigger1').item.json.From.split(\"<\")[0] }}\nSummary:\n{{ $('Parse Json Result1').item.json.summary }}\nContent:\n{{ $('Gmail Trigger1').item.json.Subject }}\n{{ $('Gmail Trigger1').item.json.snippet }}",
+        "hasOutputParser": true,
         "options": {
-          "systemMessage": "=You are a support knowledge retrieval assistant.\n\nYour task is to determine what information is needed to answer the customer.\n\nYou may use available tools to retrieve company policies, FAQs, SOPs and product documentation.\n\nNever answer from your own knowledge.\n\nOnly use retrieved company information.\n\nYou are a professional customer support assistant.\n\nYour primary responsibility is to assist customers using only the information provided in the available context and company knowledge base.\n\nRules:\n\n1. Never make up facts, policies, procedures, pricing, timelines, or product capabilities.\n2. Never assume information that is not explicitly provided.\n3. If the available information is insufficient to answer the customer's question confidently:\n\n   * Do not guess.\n   * Do not provide speculative answers.\n   * Explain that additional review is required.\n   * Inform the customer that a human support representative will follow up.\n4. If company documentation does not contain the answer, escalate the request.\n5. Be professional, friendly, and transparent.\n6. Prioritize accuracy over completeness.\n\nWhen information is missing, use language similar to:\n\n\"At the moment, I don't have enough information to provide an accurate answer. Your request has been forwarded to our support team, and a representative will follow up with you shortly.\"\n\nOnly answer based on the provided context.\n"
+          "systemMessage": "=You are a support knowledge retrieval assistant.\n\nYour task is to determine what information is needed to answer the customer.\n\nYou may use available tools to retrieve company policies, FAQs, SOPs and product documentation.\n\nNever answer from your own knowledge.\n\nOnly use retrieved company information.\n\nYou are a professional customer support assistant.\n\nYour primary responsibility is to assist customers using only the information provided in the available context and company knowledge base.\n\nThe knowledge base tool returns a \"retrievalConfidence\" field based on actual\nretrieval relevance scores. Use this value directly for your \"confidence\" output\n— do not assess confidence based on your own judgment. If retrievalConfidence\nis \"low\", set needsEscalation to true.\n\nRules:\n\n1. Never make up facts, policies, procedures, pricing, timelines, or product capabilities.\n2. Never assume information that is not explicitly provided.\n3. If the available information is insufficient to answer the customer's question confidently:\n\n   * Do not guess.\n   * Do not provide speculative answers.\n   * Explain that additional review is required.\n   * Inform the customer that a human support representative will follow up.\n4. If company documentation does not contain the answer, escalate the request.\n5. Be professional, friendly, and transparent.\n6. Prioritize accuracy over completeness.\n\nWhen information is missing, use language similar to:\n\n\"At the moment, I don't have enough information to provide an accurate answer. Your request has been forwarded to our support team, and a representative will follow up with you shortly.\"\n\nOnly answer based on the provided context.\n"
         }
       },
-      "id": "8fe24443-af9c-4331-8dd9-086673007c5c",
-      "name": "AI Agent Support Content",
+      "id": "900cc259-d568-40eb-9091-3b6f17404d0d",
+      "name": "AI Agent Support Content1",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "position": [
-        1632,
-        96
+        2896,
+        4240
       ],
       "typeVersion": 2,
       "executeOnce": false,
-      "retryOnFail": true,
-      "waitBetweenTries": 3000
+      "retryOnFail": true
     },
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "let ticketId;\ntry {\n  ticketId = $('Set New Ticket ID').item.json.ticket_id;\n} catch (e) {\n  ticketId = $('Set Exist Ticket ID').item.json.ticket_id;\n}\nreturn { json: { ...$json, ticket_id: ticketId } };"
+        "jsCode": "let ticketId;\ntry {\n  ticketId = $('Set New Ticket ID1').item.json.ticket_id;\n} catch (e) {\n  ticketId = $('Set Exist Ticket ID1').item.json.ticket_id;\n}\nreturn { json: { ...$json, ticket_id: ticketId } };"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2192,
-        96
+        3248,
+        4240
       ],
-      "id": "1fc6d192-f895-486f-9215-ad94cb30fa8d",
-      "name": "Resolve Ticket ID"
+      "id": "6cc3762d-b3f8-4d95-9882-e4672d55eb55",
+      "name": "Resolve Ticket ID1"
     },
     {
       "parameters": {
@@ -407,11 +344,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        672,
-        96
+        1872,
+        4144
       ],
-      "id": "19981894-2678-4563-8f70-27a208f86b15",
-      "name": "Check if not exist ticket"
+      "id": "b2d5d63c-fa3a-4613-93d7-8b5ecd9d3b7b",
+      "name": "Check if not exist ticket1"
     },
     {
       "parameters": {
@@ -424,7 +361,7 @@
                 "filterValues": [
                   {
                     "propertyName": "email|string",
-                    "value": "={{ $('Gmail Trigger').item.json.From.extractEmail() }}"
+                    "value": "={{ $('Gmail Trigger1').item.json.From.extractEmail() }}"
                   }
                 ]
               }
@@ -436,11 +373,11 @@
       "type": "n8n-nodes-base.hubspot",
       "typeVersion": 2.2,
       "position": [
-        -672,
-        96
+        528,
+        4144
       ],
-      "id": "2f80f6d8-7b4e-472f-b872-0f40e84e0907",
-      "name": "Search contacts",
+      "id": "42b23fe9-2b18-4bf7-97bf-392717c1723c",
+      "name": "Search contacts1",
       "alwaysOutputData": true,
       "retryOnFail": true,
       "waitBetweenTries": 3000
@@ -473,11 +410,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -448,
-        96
+        752,
+        4144
       ],
-      "id": "75d45b67-436e-4cd9-bb2d-81c56a0024ea",
-      "name": "Check contact exist"
+      "id": "457500cb-8932-4ec1-81cf-1fdf474cd886",
+      "name": "Check contact exist1"
     },
     {
       "parameters": {
@@ -486,7 +423,7 @@
             {
               "id": "ae88bcc7-3a0d-46e7-8573-e1ab005fae72",
               "name": "contact_id",
-              "value": "={{ $('Search contacts').item.json.id }}",
+              "value": "={{ $('Search contacts1').item.json.id }}",
               "type": "string"
             }
           ]
@@ -496,11 +433,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        0,
-        0
+        1200,
+        4048
       ],
-      "id": "cc0598f6-e6d2-465f-96e6-a43b7cb11640",
-      "name": "Set Exist Contact ID"
+      "id": "0882f5dc-f6ee-4380-9cdd-c636911976ae",
+      "name": "Set Exist Contact ID1"
     },
     {
       "parameters": {
@@ -519,11 +456,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        0,
-        192
+        1200,
+        4240
       ],
-      "id": "1f8ecb98-9646-4ae1-b657-42afb053e8de",
-      "name": "Set New Contact ID"
+      "id": "ae332b28-9066-4f5b-a2a7-2d8c28265ef8",
+      "name": "Set New Contact ID1"
     },
     {
       "parameters": {
@@ -542,22 +479,22 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -896,
-        96
+        304,
+        4144
       ],
-      "id": "9c969a4b-8626-415e-9eea-e3816f254cc3",
-      "name": "Merge User Input Data"
+      "id": "e363b321-ded5-4eb4-83d9-54b9fa02c856",
+      "name": "Merge User Input Data1"
     },
     {
       "parameters": {},
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        224,
-        96
+        1424,
+        4144
       ],
-      "id": "e9987b3d-f790-4310-8d09-073afdbce84b",
-      "name": "Get User Contact ID"
+      "id": "97ae0c8f-8689-46c2-9338-3c836b6b6729",
+      "name": "Get User Contact ID1"
     },
     {
       "parameters": {
@@ -577,11 +514,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        896,
-        192
+        2096,
+        4240
       ],
-      "id": "c2875c18-a377-4738-97c5-6b51c326431f",
-      "name": "Set Exist Ticket ID"
+      "id": "d22c3ce1-ff5a-4783-90d4-16e59dc50e1b",
+      "name": "Set Exist Ticket ID1"
     },
     {
       "parameters": {
@@ -601,11 +538,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1120,
-        0
+        2320,
+        4048
       ],
-      "id": "e3070088-9279-49d1-8ca1-77a447e8cd6d",
-      "name": "Set New Ticket ID"
+      "id": "93308525-eed9-4ece-a1c5-6c0320a579ed",
+      "name": "Set New Ticket ID1"
     },
     {
       "parameters": {
@@ -634,19 +571,19 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2992,
-        96
+        4336,
+        4240
       ],
-      "id": "ac992fad-5886-4fdd-bd85-01e046f1193e",
-      "name": "If Approved"
+      "id": "dfa1fd9b-3170-422c-8139-318369679d47",
+      "name": "If Approved1"
     },
     {
       "parameters": {
         "authentication": "appToken",
-        "email": "={{ $('Split User Name and Email').item.json.email }}",
+        "email": "={{ $('Split User Name and Email1').item.json.email }}",
         "additionalFields": {
-          "firstName": "={{ $('Split User Name and Email').item.json.name.split(\" \")[0] }}",
-          "lastName": "={{ $('Split User Name and Email').item.json.name.split(\" \")[1] }}"
+          "firstName": "={{ $('Split User Name and Email1').item.json.name.split(\" \")[0] }}",
+          "lastName": "={{ $('Split User Name and Email1').item.json.name.split(\" \")[1] }}"
         },
         "options": {
           "resolveData": true
@@ -655,17 +592,17 @@
       "type": "n8n-nodes-base.hubspot",
       "typeVersion": 2.2,
       "position": [
-        -224,
-        192
+        976,
+        4240
       ],
-      "id": "400253c0-85a3-4ab7-8ddc-0fdd8fa0a678",
-      "name": "Update a contact",
+      "id": "9117705f-abd8-46cc-9e2e-c068707ca971",
+      "name": "Update a contact1",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
     {
       "parameters": {
-        "chatId": "<GROUP_ID>",
+        "chatId": "",
         "text": "=🎫 Update Ticket #{{ $json.id }} ({{ $json.url }})\n\n👤 {{ ($json.properties.subject || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }}\n📂 {{ $json.properties.hs_ticket_category }}\n⚡ {{ $json.properties.hs_ticket_priority }}\n📝 {{ ($json.properties.content || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }}\n👥 {{ $json.properties.hs_assigned_team_ids }}",
         "additionalFields": {
           "parse_mode": "HTML"
@@ -674,18 +611,18 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1344,
-        192
+        2608,
+        4240
       ],
-      "id": "290c080f-835f-4434-89de-b870fa260ec0",
-      "name": "Send Update Support Ticket To Group",
+      "id": "407f3213-e4ca-441c-b4fc-158e35e69218",
+      "name": "Send Update Support Ticket To Group1",
       "webhookId": "ce7bb50a-a632-42cb-9e87-530b498b10d8",
       "retryOnFail": true,
       "waitBetweenTries": 3000
     },
     {
       "parameters": {
-        "chatId": "<GROUP_ID>",
+        "chatId": "",
         "text": "=🎫 New Ticket #{{ $json.id }} ({{ $json.url }})\n\n👤 {{ ($json.properties.subject || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }}\n📂 {{ $json.properties.hs_ticket_category }}\n⚡ {{ $json.properties.hs_ticket_priority }}\n📝 {{ ($json.properties.content || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }}\n👥 {{ $json.properties.hs_assigned_team_ids }}",
         "additionalFields": {
           "appendAttribution": false,
@@ -695,11 +632,11 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1344,
-        0
+        2608,
+        4048
       ],
-      "id": "daf254e1-2fd4-4da7-a05a-86a59c636572",
-      "name": "Send New Support Ticket To Group",
+      "id": "76235f40-eb50-43c0-a6d4-9b1462d4e2a2",
+      "name": "Send New Support Ticket To Group1",
       "webhookId": "ce7bb50a-a632-42cb-9e87-530b498b10d8",
       "retryOnFail": true,
       "waitBetweenTries": 3000
@@ -709,9 +646,9 @@
         "mode": "insert",
         "qdrantCollection": {
           "__rl": true,
-          "value": "n8n-demo-collection",
+          "value": "test-collection",
           "mode": "list",
-          "cachedResultName": "n8n-demo-collection"
+          "cachedResultName": "test-collection"
         },
         "embeddingBatchSize": 500,
         "options": {}
@@ -719,465 +656,739 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
       "typeVersion": 1.3,
       "position": [
-        -1696,
-        640
+        304,
+        4512
       ],
-      "id": "175b20e6-69c6-4e85-b6d7-f44476eb669c",
-      "name": "Qdrant Vector Store"
+      "id": "d9f21edb-e306-4e7b-987b-04f00ae924fa",
+      "name": "Qdrant Vector Store2"
     },
     {
       "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -1680,
-        864
+        320,
+        4736
       ],
-      "id": "37e8a65b-cc86-4cc4-af80-495ead62a1dc",
-      "name": "Embeddings Google Gemini1"
+      "id": "4be96814-ca9b-44c3-a8ff-b3f7070676b1",
+      "name": "Embeddings Google Gemini2"
     },
     {
       "parameters": {
         "dataType": "binary",
         "loader": "csvLoader",
-        "options": {}
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "source",
+                "value": "={{ $json.fileName }}"
+              }
+            ]
+          }
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        -1552,
-        864
+        448,
+        4736
       ],
-      "id": "151cf76f-bf3b-402e-b407-03beefa1c99a",
-      "name": "Default Data Loader"
+      "id": "509b53d4-0de6-4d44-8190-592115bc1354",
+      "name": "Default Data Loader1"
     },
     {
       "parameters": {
-        "mode": "retrieve-as-tool",
-        "toolDescription": "Primary knowledge source for customer support.\n\nUse this tool first whenever a customer asks a question.\n\nSearches internal documentation, FAQs, policies, troubleshooting guides, pricing information, and product knowledge.\n\nAnswers should be based only on information returned by this tool.\n\nDo not make assumptions or generate unsupported information.\n\nIf no relevant knowledge is found, recommend escalation to a human support specialist.",
-        "qdrantCollection": {
-          "__rl": true,
-          "value": "n8n-demo-collection",
-          "mode": "list",
-          "cachedResultName": "n8n-demo-collection"
-        },
-        "topK": 5,
-        "options": {}
+        "jsCode": "const items = [];\n\nfor (const item of $input.all()) {\n  for (const [key, binaryData] of Object.entries(item.binary)) {\n    items.push({\n      json: {\n        fileName: binaryData.fileName,\n      },\n      binary: {\n        data: binaryData\n      }\n    });\n  }\n}\n\nreturn items;"
       },
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
-      "typeVersion": 1.3,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        1824,
-        320
+        80,
+        4512
       ],
-      "id": "e7b4a51f-ed32-4bad-849c-fa23486ba194",
-      "name": "Qdrant Vector Store1"
+      "id": "59d7b779-c2ff-4c86-8d08-d9093c080b95",
+      "name": "Code in JavaScript1"
     },
     {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
-      "typeVersion": 1,
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"answer\": \"Answer content based on context\",\n  \"needsEscalation\": true,\n  \"confidence\": \"high\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
       "position": [
-        1904,
-        528
+        3200,
+        4560
       ],
-      "id": "a94eb079-f5f9-4edd-a2c5-0efa2bcf9768",
-      "name": "Embeddings Google Gemini"
+      "id": "fc010cd8-4e7f-4a44-8547-eaea45cc6fdc",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "description": "Search the company's internal knowledge base (refund policy, FAQ, product features,\nescalation procedures) for information relevant to the customer's question.\n\nAlways call this tool FIRST before answering any customer question. Never answer\nfrom your own knowledge — only use what this tool returns.\n\nThis tool returns:\n- Relevant document snippets, sorted by relevance to the query\n- A \"retrievalConfidence\" score (high/medium/low) based on the top result's\n  relevance score after reranking\n\nIf retrievalConfidence is \"low\", treat the returned information as unreliable —\ndo not use it to answer confidently, and recommend escalation instead.",
+        "workflowId": {
+          "__rl": true,
+          "value": "pASbWvyno3FW5hcq",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/pASbWvyno3FW5hcq",
+          "cachedResultName": "Retrieve Document"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ $fromAI('query', 'The customer question, rephrased concisely for semantic search') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        3024,
+        4480
+      ],
+      "id": "b5d8b294-817c-48b6-884e-91becfeddc93",
+      "name": "Call n8n Workflow Tool"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Customer Information:\n\nName:\n{{ $('Gmail Trigger1').item.json.From }}\n\nPlan:\n{{ $('Merge User Input Data1').item.json.sentiment }}\n\nTicket Category:\n{{ $('Merge User Input Data1').item.json.category }}\n\nPriority:\n{{ $('Merge User Input Data1').item.json.priority }}\n\nCustomer Message:\n\n{{ $('Gmail Trigger1').item.json.snippet }}\n\nKnowledge Base Context:\n\n{{ $('AI Agent Support Content1').first().json.output }}\n\nGenerate an email response.",
+        "options": {
+          "systemMessage": "You are a professional customer support email writer.\n\nYour responsibility is to create a customer-facing email draft.\n\nRules:\n\nUse only the information provided in the context.\nNever invent company policies, pricing, or product features.\nMaintain a professional, friendly, and empathetic tone.\nAddress the customer by name when available.\nKeep responses concise and actionable.\nClearly explain next steps if human review is required.\nGenerate:\nonly email body, not include the subject\nReturn strutured text for human preview.\n\nEmail structure:\n\nGreeting\nAcknowledgement\nAnswer based on provided context\nNext steps\nProfessional closing"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        3728,
+        4224
+      ],
+      "id": "224a3317-a06a-40cb-8515-131bb9cc5111",
+      "name": "Mail Content Agent1",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f7b1c3c8-f296-4ae4-a4cc-89fba482d4e0",
+              "leftValue": "={{ $json.output.needsEscalation }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3440,
+        4240
+      ],
+      "id": "d2fe579d-52b4-4d88-98d6-af0f3bd6cd79",
+      "name": "Check if dont need human support"
+    },
+    {
+      "parameters": {
+        "chatId": "",
+        "text": "=Ticket: # {{ $('Resolve Ticket ID1').item.json.ticket_id }} Need human support\nSupport by: {{ $('Parse Json Result1').item.json.recommendedTeam }}\nPriority: {{ $('Parse Json Result1').item.json.priority }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3632,
+        4592
+      ],
+      "id": "f8c04ea4-5696-4607-8fb3-c83f4480350d",
+      "name": "Send a text message",
+      "webhookId": "ce7bb50a-a632-42cb-9e87-530b498b10d8",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "telegramApi": {
+          "id": "UU6AEXBZ5P5JdLxv",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Resolve Ticket ID1').item.json.ticket_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"properties\": {\n    \"hs_pipeline_stage\": \"3\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        3952,
+        4576
+      ],
+      "id": "816ca439-f3ac-4802-86f3-79ff5ca0df13",
+      "name": "Update ticket status waiting for our",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "GANWFdquuFLiBv0T",
+          "name": "Hubspot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Resolve Ticket ID1').item.json.ticket_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"properties\": {\n    \"hs_pipeline_stage\": \"3\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4560,
+        4336
+      ],
+      "id": "5a7e0598-504f-4a06-9964-9ccdf8d55fa9",
+      "name": "Update ticket waiting for our",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "GANWFdquuFLiBv0T",
+          "name": "Hubspot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.hubapi.com/crm/v3/objects/tickets/{{ $('Resolve Ticket ID1').item.json.ticket_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"properties\": {\n    \"hs_pipeline_stage\": \"2\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        4784,
+        4144
+      ],
+      "id": "90acbad3-c525-4fd0-a92f-8fb4bdf8bef4",
+      "name": "Update ticket waiting for user",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "GANWFdquuFLiBv0T",
+          "name": "Hubspot"
+        }
+      }
     }
   ],
   "connections": {
-    "Gmail Trigger": {
+    "Gmail Trigger1": {
       "main": [
         [
           {
-            "node": "Merge User Input Data",
+            "node": "Merge User Input Data1",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Split User Name and Email",
+            "node": "Split User Name and Email1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Message a model": {
+    "Message a model1": {
       "main": [
         [
           {
-            "node": "Parse Json Result",
+            "node": "Parse Json Result1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Parse Json Result": {
+    "Parse Json Result1": {
       "main": [
         [
           {
-            "node": "Merge User Input Data",
+            "node": "Merge User Input Data1",
             "type": "main",
             "index": 1
           }
         ]
       ]
     },
-    "Google Gemini Chat Model": {
+    "Google Gemini Chat Model3": {
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent Support Content",
+            "node": "AI Agent Support Content1",
             "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "Google Gemini Chat Model1": {
+    "Google Gemini Chat Model4": {
       "ai_languageModel": [
         [
           {
-            "node": "Mail Content Agent",
+            "node": "Mail Content Agent1",
             "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "Reply to a message": {
+    "Reply to a message1": {
       "main": [
         [
           {
-            "node": "Update ticket status",
+            "node": "Update ticket waiting for user",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Simple Memory": {
+    "Simple Memory1": {
       "ai_memory": [
         [
           {
-            "node": "AI Agent Support Content",
+            "node": "AI Agent Support Content1",
             "type": "ai_memory",
             "index": 0
           }
         ]
       ]
     },
-    "Send message and wait for response": {
+    "Send message and wait for response1": {
       "main": [
         [
           {
-            "node": "If Approved",
+            "node": "If Approved1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Search ticket": {
+    "Search ticket1": {
       "main": [
         [
           {
-            "node": "Check if not exist ticket",
+            "node": "Check if not exist ticket1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Split User Name and Email": {
+    "Split User Name and Email1": {
       "main": [
         [
           {
-            "node": "Message a model",
+            "node": "Message a model1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Create Ticket": {
+    "Create Ticket1": {
       "main": [
         [
           {
-            "node": "Set New Ticket ID",
+            "node": "Set New Ticket ID1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Update ticket": {
+    "Update ticket1": {
       "main": [
         [
           {
-            "node": "Send Update Support Ticket To Group",
+            "node": "Send Update Support Ticket To Group1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Mail Content Agent": {
+    "Upload your file here1": {
       "main": [
         [
           {
-            "node": "Send message and wait for response",
+            "node": "Code in JavaScript1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Upload your file here": {
+    "AI Agent Support Content1": {
       "main": [
         [
           {
-            "node": "Qdrant Vector Store",
+            "node": "Resolve Ticket ID1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "AI Agent Support Content": {
+    "Resolve Ticket ID1": {
       "main": [
         [
           {
-            "node": "Resolve Ticket ID",
+            "node": "Check if dont need human support",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Resolve Ticket ID": {
+    "Check if not exist ticket1": {
       "main": [
         [
           {
-            "node": "Mail Content Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check if not exist ticket": {
-      "main": [
-        [
-          {
-            "node": "Create Ticket",
+            "node": "Create Ticket1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Set Exist Ticket ID",
+            "node": "Set Exist Ticket ID1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Search contacts": {
+    "Search contacts1": {
       "main": [
         [
           {
-            "node": "Check contact exist",
+            "node": "Check contact exist1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Check contact exist": {
+    "Check contact exist1": {
       "main": [
         [
           {
-            "node": "Set Exist Contact ID",
+            "node": "Set Exist Contact ID1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Update a contact",
+            "node": "Update a contact1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set Exist Contact ID": {
+    "Set Exist Contact ID1": {
       "main": [
         [
           {
-            "node": "Get User Contact ID",
+            "node": "Get User Contact ID1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set New Contact ID": {
+    "Set New Contact ID1": {
       "main": [
         [
           {
-            "node": "Get User Contact ID",
+            "node": "Get User Contact ID1",
             "type": "main",
             "index": 1
           }
         ]
       ]
     },
-    "Merge User Input Data": {
+    "Merge User Input Data1": {
       "main": [
         [
           {
-            "node": "Search contacts",
+            "node": "Search contacts1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get User Contact ID": {
+    "Get User Contact ID1": {
       "main": [
         [
           {
-            "node": "Search ticket",
+            "node": "Search ticket1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set Exist Ticket ID": {
+    "Set Exist Ticket ID1": {
       "main": [
         [
           {
-            "node": "Update ticket",
+            "node": "Update ticket1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set New Ticket ID": {
+    "Set New Ticket ID1": {
       "main": [
         [
           {
-            "node": "Send New Support Ticket To Group",
+            "node": "Send New Support Ticket To Group1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If Approved": {
+    "If Approved1": {
       "main": [
         [
           {
-            "node": "Reply to a message",
+            "node": "Reply to a message1",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Update ticket status2",
+            "node": "Update ticket waiting for our",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Update a contact": {
+    "Update a contact1": {
       "main": [
         [
           {
-            "node": "Set New Contact ID",
+            "node": "Set New Contact ID1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send Update Support Ticket To Group": {
+    "Send Update Support Ticket To Group1": {
       "main": [
         [
           {
-            "node": "AI Agent Support Content",
+            "node": "AI Agent Support Content1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send New Support Ticket To Group": {
+    "Send New Support Ticket To Group1": {
       "main": [
         [
           {
-            "node": "AI Agent Support Content",
+            "node": "AI Agent Support Content1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Embeddings Google Gemini1": {
+    "Embeddings Google Gemini2": {
       "ai_embedding": [
         [
           {
-            "node": "Qdrant Vector Store",
+            "node": "Qdrant Vector Store2",
             "type": "ai_embedding",
             "index": 0
           }
         ]
       ]
     },
-    "Default Data Loader": {
+    "Default Data Loader1": {
       "ai_document": [
         [
           {
-            "node": "Qdrant Vector Store",
+            "node": "Qdrant Vector Store2",
             "type": "ai_document",
             "index": 0
           }
         ]
       ]
     },
-    "Qdrant Vector Store1": {
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Qdrant Vector Store2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent Support Content1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call n8n Workflow Tool": {
       "ai_tool": [
         [
           {
-            "node": "AI Agent Support Content",
+            "node": "AI Agent Support Content1",
             "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "Embeddings Google Gemini": {
-      "ai_embedding": [
+    "Mail Content Agent1": {
+      "main": [
         [
           {
-            "node": "Qdrant Vector Store1",
-            "type": "ai_embedding",
+            "node": "Send message and wait for response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if dont need human support": {
+      "main": [
+        [
+          {
+            "node": "Mail Content Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Update ticket status waiting for our",
+            "type": "main",
             "index": 0
           }
         ]
       ]
     }
   },
-  "pinData": {},
+  "pinData": {
+    "Upload your file here1": [
+      {
+        "Upload your file(s)": [
+          {
+            "filename": "AI Customer Support Triage System - Product Features.csv",
+            "mimetype": "text/csv",
+            "size": 229
+          },
+          {
+            "filename": "AI Customer Support Triage System - Refund Policy.csv",
+            "mimetype": "text/csv",
+            "size": 194
+          },
+          {
+            "filename": "AI Customer Support Triage System - FAQ.csv",
+            "mimetype": "text/csv",
+            "size": 511
+          },
+          {
+            "filename": "AI Customer Support Triage System - Escalation Matrix.csv",
+            "mimetype": "text/csv",
+            "size": 166
+          }
+        ],
+        "submittedAt": "2026-06-25T15:32:04.553+07:00",
+        "formMode": "test"
+      }
+    ]
+  },
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "d8ee7e108d01cf09893dd8853d1c18d7e9a83ebaa9049e005c6a959d608b3875"
   }
 }
