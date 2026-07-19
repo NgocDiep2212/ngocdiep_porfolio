@@ -1,0 +1,143 @@
+[
+  {
+    "id": "en-experience-years",
+    "lang": "en",
+    "question": "How many years of experience does Diep have?",
+    "expect_sections": ["faq", "career", "experience"],
+    "must_include_any": ["1.5", "ZIGExN", "Junior"]
+  },
+  {
+    "id": "en-location",
+    "lang": "en",
+    "question": "Where is Diep based?",
+    "expect_sections": ["profile", "faq"],
+    "must_include_any": ["Ho Chi Minh", "Vietnam", "Binh Thanh"]
+  },
+  {
+    "id": "en-email",
+    "lang": "en",
+    "question": "What is Diep's email address?",
+    "expect_sections": ["profile", "links"],
+    "must_include_any": ["ngocdiep04112002@gmail.com"]
+  },
+  {
+    "id": "en-support-triage",
+    "lang": "en",
+    "question": "Tell me about the AI Support Triage RAG project.",
+    "expect_sections": ["projects"],
+    "must_include_any": ["Qdrant", "n8n", "HubSpot", "30"]
+  },
+  {
+    "id": "en-job-matcher-impact",
+    "lang": "en",
+    "question": "What was the impact of the AI Job Matcher pipeline?",
+    "expect_sections": ["projects"],
+    "must_include_any": ["8", "token", "85", "cost"]
+  },
+  {
+    "id": "en-salesforce",
+    "lang": "en",
+    "question": "Does Diep have Salesforce integration experience?",
+    "expect_sections": ["projects", "skills"],
+    "must_include_any": ["Salesforce", "Sheets", "dedup"]
+  },
+  {
+    "id": "en-skills-ai",
+    "lang": "en",
+    "question": "What AI and automation tools does Diep use?",
+    "expect_sections": ["skills"],
+    "must_include_any": ["n8n", "Gemini", "Qdrant", "Claude"]
+  },
+  {
+    "id": "en-education",
+    "lang": "en",
+    "question": "Where did Diep study?",
+    "expect_sections": ["education"],
+    "must_include_any": ["Can Tho", "Information Technology"]
+  },
+  {
+    "id": "en-remote",
+    "lang": "en",
+    "question": "Is Diep open to remote work?",
+    "expect_sections": ["faq"],
+    "must_include_any": ["remote", "Ho Chi Minh", "email"]
+  },
+  {
+    "id": "en-salary",
+    "lang": "en",
+    "question": "What is Diep's salary expectation?",
+    "expect_sections": ["faq"],
+    "must_include_any": ["not published", "email", "compensation"]
+  },
+  {
+    "id": "vi-experience",
+    "lang": "vi",
+    "question": "Diep có bao nhiêu năm kinh nghiệm?",
+    "expect_sections": ["faq", "career", "experience"],
+    "must_include_any": ["1.5", "ZIGExN", "năm"]
+  },
+  {
+    "id": "vi-location",
+    "lang": "vi",
+    "question": "Diep đang sống ở đâu?",
+    "expect_sections": ["profile", "faq"],
+    "must_include_any": ["Hồ Chí Minh", "Ho Chi Minh", "Việt Nam", "Vietnam"]
+  },
+  {
+    "id": "vi-email",
+    "lang": "vi",
+    "question": "Email liên hệ của Diep là gì?",
+    "expect_sections": ["profile", "links"],
+    "must_include_any": ["ngocdiep04112002@gmail.com"]
+  },
+  {
+    "id": "vi-rag-project",
+    "lang": "vi",
+    "question": "Dự án triage hỗ trợ khách hàng dùng RAG của Diep làm gì?",
+    "expect_sections": ["projects"],
+    "must_include_any": ["Qdrant", "n8n", "HubSpot", "Gmail"]
+  },
+  {
+    "id": "vi-job-matcher",
+    "lang": "vi",
+    "question": "AI Job Matcher tối ưu token và chi phí như thế nào?",
+    "expect_sections": ["projects"],
+    "must_include_any": ["8", "token", "85", "%"]
+  },
+  {
+    "id": "vi-skills",
+    "lang": "vi",
+    "question": "Diep biết những công cụ AI automation nào?",
+    "expect_sections": ["skills"],
+    "must_include_any": ["n8n", "Qdrant", "Gemini", "Claude"]
+  },
+  {
+    "id": "vi-education",
+    "lang": "vi",
+    "question": "Diep học đại học ở đâu?",
+    "expect_sections": ["education"],
+    "must_include_any": ["Cần Thơ", "Can Tho", "Information Technology", "Công nghệ"]
+  },
+  {
+    "id": "vi-remote",
+    "lang": "vi",
+    "question": "Diep có nhận làm remote không?",
+    "expect_sections": ["faq"],
+    "must_include_any": ["remote", "email", "Ho Chi Minh"]
+  },
+  {
+    "id": "vi-roles",
+    "lang": "vi",
+    "question": "Diep đang tìm loại công việc gì?",
+    "expect_sections": ["faq", "career"],
+    "must_include_any": ["automation", "n8n", "RAG", "integration"]
+  },
+  {
+    "id": "vi-unknown",
+    "lang": "vi",
+    "question": "Diep thích màu gì và có nuôi mèo không?",
+    "expect_sections": [],
+    "expect_low_confidence": true,
+    "must_include_any": ["knowledge", "email", "chưa", "không"]
+  }
+]

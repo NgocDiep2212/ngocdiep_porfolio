@@ -133,7 +133,7 @@
   .col-right .skill-label { min-width: 74px; font-size: 7.5px; }
 
   /* ── Section ── */
-  .section { margin-bottom: 14px; }
+  .section { margin-bottom: 7px; }
 
   .section-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -142,7 +142,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -159,8 +159,8 @@
   .summary-text {
     font-size: 10.5px;
     color: var(--text-secondary);
-    line-height: 1.58;
-    padding: 9px 13px;
+    line-height: 1.4;
+    padding: 6px 13px;
     background: var(--accent-light);
     border-left: 2.5px solid var(--accent);
     border-radius: 0 6px 6px 0;
@@ -170,8 +170,8 @@
 
   /* ── Experience ── */
   .exp-item {
-    margin-bottom: 9px;
-    padding-bottom: 9px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
     border-bottom: 1px solid var(--border);
   }
 
@@ -211,7 +211,7 @@
   .bullets li {
     position: relative;
     padding-left: 12px;
-    margin-bottom: 3px;
+    margin-bottom: 1.5px;
     font-size: 10px;
     color: var(--text-secondary);
     line-height: 1.45;
@@ -234,8 +234,8 @@
     border: 1px solid var(--border);
     border-left: 2.5px solid var(--accent);
     border-radius: 0 8px 8px 0;
-    padding: 7px 11px;
-    margin-bottom: 6px;
+    padding: 6px 11px;
+    margin-bottom: 3px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
 
@@ -259,7 +259,7 @@
   .project-bullets li {
     position: relative;
     padding-left: 11px;
-    margin-bottom: 2.5px;
+    margin-bottom: 1.5px;
     font-size: 9.5px;
     color: var(--text-secondary);
     line-height: 1.42;
@@ -403,9 +403,9 @@
       <div class="section">
         <div class="section-title">Professional Summary</div>
         <div class="summary-text">
-          <strong>AI Automation Engineer</strong> with a software engineering foundation and <strong>1.5+ years of experience</strong> in backend development, API integration, CI/CD, and workflow automation. Currently focused on LLM-powered systems — RAG pipelines, agentic workflows, and code-orchestrated AI pipelines — through production-style portfolio projects.
+          <strong>AI Automation Engineer</strong> with a <strong>Fullstack Developer</strong> background — <strong>1.5+ years of experience</strong> in backend, frontend, API integration, and CI/CD automation — now hands-on with <strong>n8n</strong> workflow automation and Python scripting through production-style portfolio projects, covering design, testing, error handling, and handover-ready documentation (exported workflow files, audit logs).
           <br>
-          Experienced in building reliable automation with measurable impact on <strong>cost, latency, and observability</strong> across <strong>n8n</strong>, <strong>Python</strong>, and CRM integrations. Strong at translating business requirements into scalable, source-grounded AI workflows.
+          Comfortable working from tickets/specs to delivery: validating data, tracing failures, and keeping stakeholders updated. Collaborated in an <strong>Agile</strong> team environment (standups, sprint delivery) to turn business requirements into working, documented automations. Also built LLM-based automation (<strong>Claude</strong>/<strong>Gemini APIs</strong>, RAG, AI agents) in portfolio projects.
         </div>
       </div>
 
@@ -415,7 +415,7 @@
 
         <div class="exp-item">
           <div class="exp-row">
-            <div class="exp-title">Junior Developer — Backend, API &amp; Automation</div>
+            <div class="exp-title">Junior Developer — Fullstack, API &amp; Automation</div>
             <div class="exp-date">Aug 2024 – Mar 2026</div>
           </div>
           <div class="exp-company">ZIGExN VeNtura Co., Ltd. · Ho Chi Minh City</div>
@@ -444,6 +444,20 @@
         <div class="section-title">Selected Projects</div>
 
         <div class="project-item">
+          <div class="project-name">AI Job Matcher — Multi-Agent AI Pipeline (Claude API + CrewAI)</div>
+          <div class="project-stack">Python · Claude API · CrewAI · SQLite · Streamlit · Jinja2 · Function Calling</div>
+          <ul class="project-bullets">
+            <li>Redesigned a 5-agent <strong>CrewAI</strong> system into a 7-stage code-orchestrated pipeline — LLMs only for CV parsing, enrichment, and scoring; search, validation, calculations, and report generation handled deterministically in code.</li>
+            <li>Built persistent <strong>SQLite</strong> state, structured outputs, retry/error handling, and per-run token/cost monitoring for incremental runs and observability.</li>
+            <li>Achieved <strong>8× fewer LLM tokens</strong>, <strong>85–90% lower operating cost</strong>, and <strong>4× faster execution</strong> vs. the original multi-agent implementation (measured run logs).</li>
+          </ul>
+          <div class="project-links">
+            <a class="plink" href="https://fabulous-daifuku-d8e73d.netlify.app/" target="_blank">◇ Live Demo</a>
+            <a class="plink" href="https://github.com/NgocDiep2212/ai_job_matcher" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-item">
           <div class="project-name">AI Support Triage &amp; RAG Response Pipeline</div>
           <div class="project-stack">n8n · Gmail · Google Gemini · Qdrant · HubSpot CRM · Telegram · Human-in-the-Loop</div>
           <ul class="project-bullets">
@@ -454,20 +468,6 @@
           <div class="project-links">
             <a class="plink" href="AI Customer Support Triage System.json" download>↓ n8n JSON</a>
             <a class="plink" href="./index.html#support-triage">◇ Portfolio</a>
-          </div>
-        </div>
-
-        <div class="project-item">
-          <div class="project-name">AI Job Matcher — Code-Orchestrated AI Automation Pipeline</div>
-          <div class="project-stack">Python · Claude API · SQLite · Streamlit · Jinja2 · Function Calling</div>
-          <ul class="project-bullets">
-            <li>Redesigned a 5-agent <strong>CrewAI</strong> system into a 7-stage code-orchestrated pipeline — LLMs only for CV parsing, enrichment, and scoring; search, validation, calculations, and report generation handled deterministically in code.</li>
-            <li>Built persistent <strong>SQLite</strong> state, structured outputs, retry/error handling, and per-run token/cost monitoring for incremental runs and observability.</li>
-            <li>Achieved <strong>8× fewer LLM tokens</strong>, <strong>85–90% lower operating cost</strong>, and <strong>4× faster execution</strong> vs. the original multi-agent implementation (measured run logs).</li>
-          </ul>
-          <div class="project-links">
-            <a class="plink" href="https://fabulous-daifuku-d8e73d.netlify.app/" target="_blank">◇ Live Demo</a>
-            <a class="plink" href="https://github.com/NgocDiep2212/ai_job_matcher" target="_blank">GitHub</a>
           </div>
         </div>
 
@@ -509,6 +509,8 @@
               <span class="stag stag-teal">Claude API</span>
               <span class="stag stag-teal">Qdrant</span>
               <span class="stag stag-teal">Vector Search</span>
+              <span class="stag stag-teal">Prompt Engineering</span>
+              <span class="stag stag-teal">Latency &amp; Cost Optimization</span>
             </div>
           </div>
           <div class="skill-row">
@@ -517,6 +519,8 @@
               <span class="stag stag-indigo">HubSpot</span>
               <span class="stag stag-indigo">Salesforce</span>
               <span class="stag stag-indigo">REST APIs</span>
+              <span class="stag stag-indigo">Webhooks</span>
+              <span class="stag stag-indigo">Google Workspace</span>
               <span class="stag stag-indigo">OAuth / JWT</span>
               <span class="stag stag-indigo">API Integration</span>
             </div>
@@ -525,6 +529,7 @@
             <div class="skill-label">Backend</div>
             <div class="skill-tags">
               <span class="stag stag-gray">Python</span>
+              <span class="stag stag-gray">JavaScript</span>
               <span class="stag stag-gray">SQLite</span>
               <span class="stag stag-gray">PHP / CakePHP</span>
               <span class="stag stag-gray">Jenkins CI/CD</span>

@@ -6,6 +6,7 @@
 <title>Trinh Thi Ngoc Diep — AI Automation Engineer</title>
 <meta name="description" content="AI Automation Engineer specializing in n8n workflows, AI agents, RAG pipelines, and CRM integrations across HubSpot and Salesforce. Building systems that turn hours into minutes.">
 <link rel="canonical" href="https://ngocdiep.dev/portfolio/">
+<meta name="portfolio-chat-api" content="/api/chat">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
@@ -1873,6 +1874,299 @@ footer {
   color: #059669;
 }
 
+/* ═══ PORTFOLIO CHAT WIDGET ═══ */
+.chat-launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 80;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--sh-md);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.chat-launcher:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.28);
+}
+.chat-launcher svg { width: 24px; height: 24px; }
+.chat-launcher.is-hinting {
+  animation: chatLauncherPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes chatLauncherPulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25); transform: scale(1); }
+  50% { box-shadow: 0 8px 28px rgba(13, 148, 136, 0.45); transform: scale(1.06); }
+}
+
+/* First-visit hint pointing at chat launcher */
+.chat-hint {
+  position: fixed;
+  right: 92px;
+  bottom: 34px;
+  z-index: 85;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.chat-hint.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.chat-hint.is-hiding {
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+}
+.chat-hint-bubble {
+  background: var(--accent-dark);
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(19, 78, 74, 0.28);
+  max-width: 200px;
+  position: relative;
+}
+.chat-hint-bubble::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  margin-top: -6px;
+  border: 6px solid transparent;
+  border-left-color: var(--accent-dark);
+}
+.chat-hint-arrow {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  flex-shrink: 0;
+  animation: chatHintNudge 0.9s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(13, 148, 136, 0.35));
+}
+@keyframes chatHintNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+@media (max-width: 520px) {
+  .chat-hint {
+    right: 78px;
+    bottom: 26px;
+  }
+  .chat-hint-bubble {
+    font-size: 12px;
+    max-width: 160px;
+    padding: 8px 10px;
+  }
+}
+
+.chat-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 90px;
+  z-index: 800;
+  width: min(380px, calc(100vw - 28px));
+  height: min(520px, calc(100vh - 120px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(17, 24, 39, 0.12);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: chatIn 0.28s ease;
+}
+.chat-panel.is-open { display: flex; }
+
+@keyframes chatIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.chat-header {
+  padding: 14px 16px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.chat-header h2 {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+.chat-header p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  opacity: 0.88;
+  line-height: 1.4;
+}
+.chat-close {
+  border: none;
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+.chat-close:hover { background: rgba(255,255,255,0.24); }
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  background:
+    radial-gradient(ellipse at top right, rgba(13,148,136,0.06), transparent 45%),
+    var(--canvas);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-bubble {
+  max-width: 92%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+.chat-bubble.bot {
+  align-self: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.chat-bubble.user {
+  align-self: flex-end;
+  background: var(--accent-light);
+  border: 1px solid rgba(13,148,136,0.2);
+  color: var(--accent-dark);
+}
+.chat-bubble.typing { color: var(--text-muted); font-style: italic; }
+
+.chat-answer { white-space: normal; }
+.chat-answer strong { font-weight: 700; color: var(--accent-dark); }
+
+.chat-citations {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.chat-citations-label {
+  width: 100%;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+.chat-cite {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+.chat-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 10px;
+  background: var(--canvas);
+}
+.chat-sug {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, color 0.15s;
+}
+.chat-sug:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.chat-form input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+.chat-form input:focus { border-color: var(--accent); background: #fff; }
+.chat-form button {
+  border: none;
+  border-radius: 12px;
+  padding: 0 14px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+.chat-form button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+  .chat-launcher { right: 14px; bottom: 14px; }
+  .chat-panel {
+    right: 10px;
+    left: 10px;
+    bottom: 78px;
+    width: auto;
+    height: min(70vh, 520px);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2535,6 +2829,32 @@ footer {
   </div>
 </footer>
 
+<!-- ═══ PORTFOLIO RAG CHAT ═══ -->
+<div class="chat-hint" id="chat-hint" role="status" aria-live="polite" hidden>
+  <div class="chat-hint-bubble">Ask me anything about Diep’s work →</div>
+  <svg class="chat-hint-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M4 12h12.5M13 6.5 18.5 12 13 17.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+<button type="button" class="chat-launcher" id="chat-launcher" aria-controls="chat-panel" aria-expanded="false" aria-label="Open chat about Diep">
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3h9A2.5 2.5 0 0 1 19 5.5v7A2.5 2.5 0 0 1 16.5 15H12l-3.5 3.2c-.5.45-1.3.1-1.3-.55V15H7.5A2.5 2.5 0 0 1 5 12.5v-7Z" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="12" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/></svg>
+</button>
+<div class="chat-panel" id="chat-panel" role="dialog" aria-labelledby="chat-title" aria-hidden="true">
+  <div class="chat-header">
+    <div>
+      <h2 id="chat-title">Ask about Diep</h2>
+      <p>Answers from my portfolio knowledge base (EN facts · reply in your language).</p>
+    </div>
+    <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">×</button>
+  </div>
+  <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
+  <div class="chat-suggestions" id="chat-suggestions"></div>
+  <form class="chat-form" id="chat-form">
+    <input id="chat-input" type="text" maxlength="500" autocomplete="off" placeholder="Ask about experience, projects, skills…" aria-label="Your question" />
+    <button type="submit" id="chat-send">Send</button>
+  </form>
+</div>
+
 <script>
   // ── Mobile nav hamburger ───────────────────────────────────
   (function () {
@@ -2626,5 +2946,6 @@ footer {
 <!-- Global tooltip for SVG workflow node hover -->
 <div id="wf-tooltip" role="tooltip"></div>
 
+<script src="./portfolio/chat-widget.js" defer></script>
 </body>
 </html>
